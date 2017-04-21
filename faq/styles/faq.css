@@ -60,10 +60,10 @@ i.paginate {border: 1px solid #ccc; padding: 2px 6px 2px 6px; font-weight: bold;
 
 
 /* try to fix sizing differences between buttons and links */
-input[type="button"].osf_button,input[type="submit"].osf_button {padding: 2px 5px 2px 5px; min-width: 50px; max-width: 250px;}
-i.osf_button,a.osf_button, button.osf_button {padding: 3px 5px 3px 5px; min-width: 48px; max-width: 244px;}
+input[type="button"].osf_button, input[type="submit"].osf_button {padding: 2px 5px 2px 5px; min-width: 50px; max-width: 250px;}
+i.osf_button, a.osf_button, button.osf_button {padding: 3px 5px 3px 5px; min-width: 48px; max-width: 244px;}
 
-input[type="button"].osf_button,input[type="submit"].osf_button, i.osf_button, button.osf_button {cursor: pointer; font-size: 12px; width:auto; height:auto; border-collapse: collapse; vertical-align:middle; margin:0;}
+input[type="button"].osf_button, input[type="submit"].osf_button, i.osf_button, button.osf_button {cursor: pointer; font-size: 12px; width:auto; height:auto; border-collapse: collapse; vertical-align:middle; margin:0;}
 
 button.osf_button, i.osf_button, input[type="button"].osf_button, input[type="submit"].osf_button, i.paginate:hover, i.current{
 display: inline-block;
