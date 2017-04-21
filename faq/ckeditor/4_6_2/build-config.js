@@ -13,10 +13,10 @@
  * (1) http://ckeditor.com/builder
  *     Visit online builder to build CKEditor from scratch.
  *
- * (2) http://ckeditor.com/builder/6be7eb10ae942bec1d3c78e03cad6dd5
+ * (2) http://ckeditor.com/builder/a56c2aaae8121ae69e175431ce8957ea
  *     Visit online builder to build CKEditor, starting with the same setup as before.
  *
- * (3) http://ckeditor.com/builder/download/6be7eb10ae942bec1d3c78e03cad6dd5
+ * (3) http://ckeditor.com/builder/download/a56c2aaae8121ae69e175431ce8957ea
  *     Straight download link to the latest version of CKEditor (Optimized) with the same setup as before.
  *
  * NOTE:
@@ -38,7 +38,6 @@ var CKBUILDER_CONFIG = {
 		'.jshintignore',
 		'.jshintrc',
 		'.mailmap',
-		'README.md',
 		'bender-err.log',
 		'bender-out.log',
 		'bender.js',
@@ -54,53 +53,40 @@ var CKBUILDER_CONFIG = {
 		'about' : 1,
 		'basicstyles' : 1,
 		'blockquote' : 1,
-		'button' : 1,
 		'clipboard' : 1,
 		'colorbutton' : 1,
 		'colordialog' : 1,
 		'contextmenu' : 1,
-		'dialog' : 1,
 		'dialogadvtab' : 1,
-		'dialogui' : 1,
 		'div' : 1,
 		'elementspath' : 1,
 		'enterkey' : 1,
 		'entities' : 1,
-		'fakeobjects' : 1,
 		'filebrowser' : 1,
 		'find' : 1,
 		'flash' : 1,
 		'floatingspace' : 1,
-		'floatpanel' : 1,
 		'font' : 1,
 		'format' : 1,
 		'horizontalrule' : 1,
 		'htmlwriter' : 1,
 		'image' : 1,
-		'indent' : 1,
 		'indentlist' : 1,
 		'justify' : 1,
 		'link' : 1,
 		'list' : 1,
-		'listblock' : 1,
 		'liststyle' : 1,
 		'magicline' : 1,
 		'maximize' : 1,
-		'menu' : 1,
-		'menubutton' : 1,
 		'newpage' : 1,
 		'oembed' : 1,
 		'pagebreak' : 1,
-		'panel' : 1,
-		'panelbutton' : 1,
 		'pastefromword' : 1,
 		'pastetext' : 1,
-		'popup' : 1,
 		'preview' : 1,
 		'print' : 1,
 		'removeformat' : 1,
 		'resize' : 1,
-		'richcombo' : 1,
 		'scayt' : 1,
 		'selectall' : 1,
 		'showblocks' : 1,
