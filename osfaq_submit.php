@@ -85,7 +85,7 @@ if (isset($_GET['action']) && ($_GET['action'] == 'send') && (OSFDB_USER_SUBMITS
 
 
   // validate email address
-  $regexp = "/^[^0-9][A-z0-9_\-\.]+([.][A-z0-9_\-\.]+)*[@][A-z0-9_\-\.]+([.][A-z0-9_]+)*[.][A-z]{2,4}$/";
+  $regexp = "/^[^@]+@[^@]+$/";// Super basic. Avoids false positives with new TLD's (Edit: Tim Gall, 2017-04-20)
 
   if(!preg_match($regexp, $email)) {
     $error = true;
