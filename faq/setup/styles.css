@@ -1,0 +1,50 @@
+body{color:#333; font-family:arial, helvetica, sans-serif; font-size:9pt; margin:0; padding:0;}
+img, fieldset {border:None;}
+
+a {color:#006699; text-decoration: underline;}
+a:hover {color:#DB8606; text-decoration: underline;}
+
+h2, h3, h4, h5, h6{margin: 0.7em 0 0 0; letter-spacing: -1px; color: #07B;}
+h1 {font-size: 1.4em; color: #07B; margin: 0.1em 0 1.1em 0; letter-spacing: -1px;}
+h2 {font-size: 1.3em;}
+h3 {font-size: 1.2em;}
+h4 {font-size: 1.1em;}
+h5 {font-size: 1em;}
+h6 {font-size: 1em;}
+
+strong {color:#000;}
+
+#maincontent{width:700px; margin:5px auto 0 auto; padding:5px 10px 10px 10px; background:url(images/bg.jpg) top left repeat-x #fff; border:1px solid #ccc;}
+#maincontent .wmark{width:700px; background:url(images/watermark.jpg) bottom right no-repeat #fff;}
+#maincontent .warn{background-color: #FFDCA8; font-weight:bold; margin: 0; padding:5px;}
+
+#foot{padding:10px; border:1px solid #666; background:#ececec; text-align:center; width:700px; margin:0 auto 0 auto;}
+
+table{ background-color:#FFFFFF}
+th{ background:url(images/bg.jpg) top left repeat-x #cccccc; font-weight:bold; color:#07B; text-align:left; text-indent:10px; border:1px solid #cccccc;}
+td.label{ font-weight:bold}
+tr td{background-color:#FFFFFF}
+tr a:hover td{ background-color:#FFF8E8}
+.row{ background-color:#eeeeee }
+.rowalt{background-color:#ffffff}
+
+.desc{background-color:#efefef; padding:10px;}
+
+/* system messages */
+.messageHandlerSuccess{background-color:#dff0d8; color:#468847; padding:5px; border:1px solid #468847;}
+.messageHandlerWarning{background-color:#fcf8e3; color:#c09853; padding:5px; border:1px solid #c09853;}
+.messageHandlerError{background-color:#f2dede; color:#b94a48; padding:5px; border:1px solid #b94a48;}
+.messageHandlerPlain{background-color:#d9edf7; color:#3a87ad; padding:5px; border:1px solid #3a87ad;}
+.messageHandlerSuccess, .messageHandlerWarning, .messageHandlerError, .messageHandlerPlain{border-radius: .3em; -khtml-border-radius: .3em; -moz-border-radius: .3em; -webkit-border-radius: .3em;}
+
+/* form styling */
+input[type="text"], input[type="password"], textarea, select, input[type="text"][readonly="readonly"]
+{padding:2px; background-color:#eeeeee; border:1px solid #999999; color:#000000; border-radius: .3em; -khtml-border-radius: .3em; -moz-border-radius: .3em; -webkit-border-radius: .3em;}
+select{padding:0;}
+
+input[type="text"][disabled="disabled"], select[disabled="disabled"],
+input[type="text"][disabled="disabled"]:hover, select[disabled="disabled"]:hover,
+input[type="text"][disabled="disabled"]:focus, select[disabled="disabled"]:focus{background-color:#CCCCCC; color:#000000}
+
+input[type="text"]:hover, input[type="password"]:hover, textarea:hover, select:hover, input[type="text"][readonly="readonly"]:hover{background-color:#FFFFCC;}
+input[type="text"]:focus, input[type="password"]:focus, textarea:focus, select:focus, input[type="text"][readonly="readonly"]:focus{background-color:#FFFFCC;}

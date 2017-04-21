@@ -1,0 +1,13 @@
+# deny everything
+<FilesMatch ".*">
+  Order Allow,Deny
+  Deny from all
+</FilesMatch>
+
+# allow necessary
+<FilesMatch ".*\.(pdf|txt|odt|doc|docx|tab|csv|ods|xls|xlsx|PDF|TXT|ODT|DOC|DOCX|TAB|CSV|ODS|XLS|XLSX)$">
+  Order Allow,Deny
+  Allow from all
+</FilesMatch>
+
+IndexIgnore */*

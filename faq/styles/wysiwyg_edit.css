@@ -1,0 +1,3 @@
+/* used by the WYSIWYG editor so it matches the client side */
+#faqs {text-align:left;}
+.answer {text-align:left; padding:0 5px 0 5px;}

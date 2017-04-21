@@ -1,0 +1,148 @@
+#nav li a.osfaq {background-image:url(../img/icons/book.png);}
+
+/* faq pages */
+#faqs h1{margin:5px 0 5px 0; clear:both; font-size:16pt;}
+#faqs h2{margin:0 0 5px 0; clear:both; font-size:14pt;}
+#faqs table tr td h1{margin:5px 0 5px 0; clear:both; font-size:1.5em;}
+#faqs pre{font:normal 10px verdana,arial,helvetica,sans-serif; color:#808080; margin-bottom:0}
+#faqs .Q{font:normal 18pt arial, helvetica,tahoma; color:#D3D3D3; background-color:#999999; width:10px; padding:10px 0 0 0; border-top:1px solid #666666; border-left:1px solid #666666;}
+#faqs .A{font:normal 18pt arial, helvetica,tahoma; color:#666666; background-color:#CCCCCC; width:10px; padding:10px 0 0 0; border-left:1px solid #666666; border-right:1px solid #666666; border-bottom:1px solid #666666}
+#faqs .question{color:#FFFFFF; font-weight:bold; margin:0; padding:3px; font-size:10pt; background-color:#999999; border-top:1px solid #666666; border-right:1px solid #666666}
+#faqs .question a:link{color:#FFFFFF; margin:0; padding:3px; font-size:10pt; text-decoration:none}
+#faqs .question a:visited{color:#FFFFFF; text-decoration:none}
+#faqs .question a:hover, .question a:active{color:#FFEECC; text-decoration:underline}
+
+#faqs p.question{padding:0}
+#faqs .answer{font-weight:normal; background:#EEEEEE; margin:0; padding:0; font-size:10pt; border:1px solid #333333}
+#faqs p.answer{padding:10px}
+#faqs .faq{font-size:12px}
+
+#faqs .fade{color:#999999;}
+
+/* external faq box to suit a page section */
+#faq_box {width:100%}
+#faq_box h3{background: url(../img/bg.jpg) repeat-x; padding: 5px 0 5px 5px; margin:0; border: 1px solid #cccccc;}
+#faq_box h4{background-color: #F9F9F9; margin:0; text-indent: 5px;}
+#faq_box a{margin:0 0 0 5px;}
+#faq_box .featured{float: left; margin: 0 10px 0 0; width: 32%;}
+#faq_box .popular{float: left; margin: 0 10px 0 0; width: 32%;}
+#faq_box .newest{float: left; margin: 0 0 0 0; width: 32%;}
+
+/* system messages */
+.messageHandlerSuccess{background-color:#dff0d8; color:#468847; padding:5px; border:1px solid #468847;}
+.messageHandlerWarning{background-color:#fcf8e3; color:#c09853; padding:5px; border:1px solid #c09853;}
+.messageHandlerError{background-color:#f2dede; color:#b94a48; padding:5px; border:1px solid #b94a48;}
+.messageHandlerPlain{background-color:#d9edf7; color:#3a87ad; padding:5px; border:1px solid #3a87ad;}
+.messageHandlerSuccess, .messageHandlerWarning, .messageHandlerError, .messageHandlerPlain{border-radius: .3em; -khtml-border-radius: .3em; -moz-border-radius: .3em; -webkit-border-radius: .3em;}
+
+/* form styling */
+input[type="text"], input[type="password"], textarea, select{padding:3px; background-color:#ffffff; border:1px solid #999999; color:#000000; border-radius: .3em; -khtml-border-radius: .3em; -moz-border-radius: .3em; -webkit-border-radius: .3em;}
+
+input[type="text"][disabled="disabled"], input[type="text"][readonly="readonly"], select[disabled="disabled"],
+input[type="text"][disabled="disabled"]:hover, input[type="text"][readonly="readonly"]:hover, select[disabled="disabled"]:hover,
+input[type="text"][disabled="disabled"]:focus, input[type="text"][readonly="readonly"]:focus, select[disabled="disabled"]:focus{background-color:#CCCCCC; color:#000000}
+
+input[type="text"]:hover, input[type="password"]:hover, textarea:hover, select:hover{background-color:#FFFFCC;}
+input[type="text"]:focus, input[type="password"]:focus, textarea:focus, select:focus{background-color:#FFFFCC;}
+
+/* pagination and buttons */
+.paginate_row {padding: 2px 6px 2px 6px; font-family: Arial, Helvetica, sans-serif; background-color:#eee; color:#3a87ad; border:1px solid #ddd;}
+.paginate_top{-webkit-border-radius: 10px 10px 0 0; -khtml-border-radius: 10px 10px 0 0;  -moz-border-radius: 10px 10px 0 0; border-radius: 10px 10px 0 0;}
+.paginate_bot{-webkit-border-radius: 0 0 10px 10px; -khtml-border-radius: 0 0 10px 10px;  -moz-border-radius: 0 0 10px 10px; border-radius: 0 0 10px 10px;}
+
+.paginate_row i, .paginate_row span.inactive{border-radius: .3em; -khtml-border-radius: .3em; -moz-border-radius: .3em; -webkit-border-radius: .3em;}
+.paginate_row input[type="text"], .paginate_row input[type="password"], .paginate_row textarea, .paginate_row select{padding:0;}
+.paginate {color: #666; font-size: .8em;}
+.current {color: #fff; font-size: .8em;}
+.inactive {color: #aaa; font-size: .8em;}
+
+i.paginate {border: 1px solid #ccc; padding: 2px 6px 2px 6px; font-weight: bold; font-style:normal; text-decoration: none; color: #2F88D9; background-color:#F7F7F7;}
+
+
+/* try to fix sizing differences between buttons and links */
+input[type="button"].osf_button,input[type="submit"].osf_button {padding: 2px 5px 2px 5px; min-width: 50px; max-width: 250px;}
+i.osf_button,a.osf_button, button.osf_button {padding: 3px 5px 3px 5px; min-width: 48px; max-width: 244px;}
+
+input[type="button"].osf_button,input[type="submit"].osf_button, i.osf_button, button.osf_button {cursor: pointer; font-size: 12px; width:auto; height:auto; border-collapse: collapse; vertical-align:middle; margin:0;}
+
+button.osf_button, i.osf_button, input[type="button"].osf_button, input[type="submit"].osf_button, i.paginate:hover, i.current{
+display: inline-block;
+text-align:center;
+border:1px solid #666666;
+border-radius: .3em;
+-khtml-border-radius: .3em;
+-moz-border-radius: .3em;
+-webkit-border-radius: .3em;
+color: #ffffff;
+font-style:normal;
+/* Fallback */
+background-color: #184E81;
+/* IE7 */
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#539CDF', endColorstr='#184E81');
+/* IE8 */
+-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#539CDF', EndColorStr='#184E81')";
+/* IE9. Renders an svg image */
+background-image: url(button_gradient.php?from=539CDF&to=184E81);
+/* IE10 Consumer Preview */ 
+background-image: -ms-linear-gradient(top, #539CDF 0%, #184E81 100%);
+/* Mozilla Firefox */ 
+background-image: -moz-linear-gradient(top, #539CDF 0%, #184E81 100%);
+/* Opera */ 
+background-image: -o-linear-gradient(top, #539CDF 0%, #184E81 100%);
+/* Webkit (Safari/Chrome 10) */ 
+background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #539CDF), color-stop(1, #184E81));
+/* Webkit (Chrome 11+) */ 
+background-image: -webkit-linear-gradient(top, #539CDF 0%, #184E81 100%);
+/* W3C Markup, IE10 Release Preview */ 
+background-image: linear-gradient(to bottom, #539CDF 0%, #184E81 100%);
+}
+button.osf_button:hover, i.osf_button:hover, input[type="button"].osf_button:hover, input[type="submit"].osf_button:hover{
+font-style:normal;
+/* Fallback */
+background-color: #7ACBE3;
+/* IE7 */
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#7ACBE3', endColorstr='#216DB4');
+/* IE8 */
+-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#7ACBE3', EndColorStr='#216DB4')";
+/* IE9. Renders an svg image */
+background-image: url(button_gradient.php?from=7ACBE3&to=216DB4);
+/* IE10 Consumer Preview */ 
+background-image: -ms-linear-gradient(top, #7ACBE3 0%, #216DB4 100%);
+/* Mozilla Firefox */ 
+background-image: -moz-linear-gradient(top, #7ACBE3 0%, #216DB4 100%);
+/* Opera */ 
+background-image: -o-linear-gradient(top, #7ACBE3 0%, #216DB4 100%);
+/* Webkit (Safari/Chrome 10) */ 
+background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #7ACBE3), color-stop(1, #216DB4));
+/* Webkit (Chrome 11+) */ 
+background-image: -webkit-linear-gradient(top, #7ACBE3 0%, #216DB4 100%);
+/* W3C Markup, IE10 Release Preview */ 
+background-image: linear-gradient(to bottom, #7ACBE3 0%, #216DB4 100%);
+}
+button.osf_button:active, i.osf_button:active, input[type="button"].osf_button:focus, input[type="submit"].active:focus, i.paginate:active{
+border-color: #000000;
+color: #ffffff;
+font-style:normal;
+/* Fallback */
+background-color: #3F92DC;
+/* IE7 */
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#216DB4', endColorstr='#3F92DC');
+/* IE8 */
+-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#216DB4', EndColorStr='#3F92DC')";
+/* IE9. Renders an svg image */
+background-image: url(button_gradient.php?from=216DB4&to=3F92DC);
+/* IE10 Consumer Preview */ 
+background-image: -ms-linear-gradient(top, #216DB4 0%, #3F92DC 100%);
+/* Mozilla Firefox */ 
+background-image: -moz-linear-gradient(top, #216DB4 0%, #3F92DC 100%);
+/* Opera */ 
+background-image: -o-linear-gradient(top, #216DB4 0%, #3F92DC 100%);
+/* Webkit (Safari/Chrome 10) */ 
+background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #216DB4), color-stop(1, #3F92DC));
+/* Webkit (Chrome 11+) */ 
+background-image: -webkit-linear-gradient(top, #216DB4 0%, #3F92DC 100%);
+/* W3C Markup, IE10 Release Preview */ 
+background-image: linear-gradient(to bottom, #216DB4 0%, #3F92DC 100%);
+}
+i.current {padding: 2px 6px 2px 6px; font-weight: bold; cursor: default; font-size: .8em; text-decoration: none; color: #fff; border-radius: 1.0em; -khtml-border-radius: 1.0em; -moz-border-radius: 1.0em; -webkit-border-radius: 1.0em;}
+span.inactive {border: 1px solid #999; padding: 2px 6px 2px 6px; cursor: default; font-weight: bold;}
