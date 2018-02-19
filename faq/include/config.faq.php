@@ -19,8 +19,8 @@
 
 ************************************************************************* */
 
-define('FAQ_VERSION','1.2.2 ST');//don't change this. Changes from version to version.
-define('FAQ_CK_VERSION', '4_6_2');//ckeditor path constant.
+define('FAQ_VERSION','1.3.1 ST');//don't change this. Changes from version to version.
+define('FAQ_CK_VERSION', '4_8_0');//ckeditor path constant.
 
 // eg: yourdomain.com OR www.yourdomain.com OR yoursubdomain.yourdomain.com ETC.
 define('SERVER_DOMAIN', $_SERVER['SERVER_NAME']);

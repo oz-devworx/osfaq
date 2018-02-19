@@ -6,7 +6,7 @@
 
 
   Tim Gall
-  Copyright (c) 2009-2013 osfaq.oz-devworx.com.au - All Rights Reserved.
+  Copyright (c) 2009-2018 osfaq.oz-devworx.com.au - All Rights Reserved.
   http://osfaq.oz-devworx.com.au
 
   This file is part of osFaq.
@@ -29,7 +29,7 @@ class FaqSettings{
    * and/or to display a color swatch if the value is a color.
    *
    * @param mixed $string
-   * @return a color swatch if the value is a 3 or 6 digit hexidecimal color reference; otherwise null is returned
+   * @return mixed html div color swatch if the value is a 3 or 6 digit hexidecimal color reference; otherwise null
    */
   public static function is_string_a_color($string){
   	return preg_match('@^#[a-f0-9]{6}|#[a-f0-9]{3}$@Ui', $string) ? '<div style="width:50px; height:20px; background-color:' . $string . ';">&nbsp;</div>' : null;
@@ -40,7 +40,7 @@ class FaqSettings{
    * or fallback to php.ini date.timezone
    * and any manual entries in the active localisation file.
    *
-   * @return a 2 dimensional array of timezone names
+   * @return array 2 dimensional array of timezone names
    */
   public static function getTimezones(){
     $timezone_list = array();
@@ -252,6 +252,21 @@ class FaqSettings{
 
   public static function bytes_to_megabytes($byte_value){
     return round(($byte_value/(1024*1024)), 0);
+  }
+
+  public static function findThemes() {
+  	$themeFolders = array();
+  	$dir = dir(OSF_DOC_ROOT . DIR_FS_WEB_ROOT . 'faq/ckeditor/' . FAQ_CK_VERSION . '/skins');
+  	while ($single_file = $dir->read()) {
+  		$single_file_utf8 = FaqFuncs::utf8_to_ascii($single_file, true);
+  		if ((substr($single_file, 0, 1)!='.') && (substr($single_file, 0, 1)!='_') && (substr($single_file, -4) != '.txt') && ($single_file != 'index.php') && !in_array($single_file, $themeFolders)){
+  			if($single_file_utf8==$single_file) $themeFolders[] = array( 'id' => $single_file, 'text' => ucfirst( strtolower($single_file_utf8) ) );
+  		}
+  	}
+  	$dir->close();
+  	reset($themeFolders);
+
+  	return $themeFolders;
   }
 
 }

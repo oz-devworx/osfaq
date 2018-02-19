@@ -26,7 +26,9 @@
  * @param string $search_str search text if any
  */
 function show_faq_answer($faq_id, $question_str, $answer_str, $document, $document_name, $search_str){
-  global $rf_rows, $showall, $category_id, $answer;//$answer is an answer index (int)
+	global $rf_rows, $showall, $category_id, $answer, $osfAdapter;//$answer is an answer index (int)
+
+        $answer_str = $osfAdapter->fetch_inline_images($answer_str);
 
         // update faq view counter
         db_query('UPDATE ' . TABLE_FAQS . ' SET client_views = (client_views + 1) WHERE id = ' . $faq_id . ';');

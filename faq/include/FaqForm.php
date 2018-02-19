@@ -6,7 +6,7 @@
 
 
  Tim Gall
- Copyright (c) 2009-2013 osfaq.oz-devworx.com.au - All Rights Reserved.
+ Copyright (c) 2009-2018 osfaq.oz-devworx.com.au - All Rights Reserved.
  http://osfaq.oz-devworx.com.au
 
  This file is part of osFaq.
@@ -31,52 +31,6 @@ class FaqForm {
   }
 
   /**
-   * TODO: remove this function.
-   *
-   * Outputs a form button
-   *
-   * @deprecated this function is no longer used and will be removed in the future.
-   * Please use "submit_css(...)" instead.
-   *
-   * @param mixed $image - ignored in this release.
-   * @param string $title - Visible button text
-   * @param string $parameters - [optional] additional html params
-   * @return 1 form submit button
-   */
-  function submit_image($image, $title = '', $parameters = '', $icon = '') {
-    $image_submit = '<button type="submit" class="osf_button"';
-
-    //if (FaqFuncs::not_null($title)) $image_submit .= ' title=" ' . FaqFuncs::output_string($title) . ' "';
-    if (FaqFuncs::not_null($parameters)) $image_submit .= ' ' . $parameters;
-    $image_submit .= '>';
-    $image_submit .= $icon . ' ' . FaqFuncs::output_string($title);
-    $image_submit .= '</button>';
-
-    return $image_submit;
-  }
-
-  /**
-   * TODO: remove this function.
-   *
-   * Output a button suitable for wrapping in a html link.
-   *
-   * @deprecated this function is no longer used and will be removed in the future.
-   * Please use "button_css(...)" instead.
-   *
-   * @param mixed $image - ignored in this release.
-   * @param string $title - Visible button text
-   * @param string $params - [optional] additional html params
-   * @return 1 button themed div for wrapping in a html link
-   */
-  function button_image($image, $title = '', $params = '', $icon = '') {
-      $button = '<i class="osf_button"';
-      //if (FaqFuncs::not_null($title)) $button .= ' title=" ' . FaqFuncs::output_string($title) . ' "';
-      if (FaqFuncs::not_null($params)) $button .= ' ' . $params;
-      $button .= '>' . $icon . ' ' . FaqFuncs::output_string($title) . '</i>';
-    return $button;
-  }
-
-  /**
    * Outputs a form button
    *
    * @param string $text - Visible button text
@@ -84,7 +38,7 @@ class FaqForm {
    * @param string $params - additional params to be included in the button tag
    * @param string $position - [default is left] left or right
    * @param string $button_class - [optional] for custom button classes
-   * @return 1 styled form submit button
+   * @return string styled form submit button
    */
   function submit_css($text, $button_icon = '', $params = '', $position = 'left', $button_class = 'osf_button') {
 
@@ -115,7 +69,7 @@ class FaqForm {
    * @param string $params - additional params to be included in the button tag
    * @param string $position - [default is left] left or right
    * @param string $button_class - [optional] for custom button classes
-   * @return 1 styled form submit button
+   * @return string styled form submit button
    */
   function button_css($text, $button_icon = '', $params = '', $position = 'left', $button_class = 'osf_button') {
 
@@ -319,7 +273,7 @@ class FaqForm {
    * @param string $theme - the theme to use for this editors skin
    * @param string $lang_code [optional]
    * @param string $lang_direction [optional]
-   * @return 1 WYSIWYG editor ready to use
+   * @return string A html WYSIWYG editor ready to use
    */
   function editor_field($name, $width, $height, $text, $tbar = '', $return = false, $theme = '', $lang_code = OSF_LANG_CODE, $lang_direction = OSF_LANG_DIRECTION) {
   	if($tbar=='Client'){
@@ -329,16 +283,19 @@ class FaqForm {
   		);
   	}
   	// theme can be changed from settings admin page
-  	switch($theme){
-  		case 'Kama':
-  			$config['skin'] = 'kama';
-  			break;
-  		case 'Default':
-  		case 'Moono':
-  		default:
-  			$config['skin'] = 'moono';
-  			break;
-  	}
+//   	switch($theme){
+//   		case 'Kama':
+//   			$config['skin'] = 'kama';
+//   			break;
+//   		case 'Default':
+//   		case 'Moono':
+//   		default:
+//   			$config['skin'] = 'moono';
+//   			break;
+//   	}
+  	$config['skin'] = ( is_dir( OSF_DOC_ROOT . DIR_FS_WEB_ROOT . 'faq/ckeditor/' . FAQ_CK_VERSION . '/skins/' . $theme) ? $theme : 'moono');
+
+
   	$config['width'] = $width;
   	$config['height'] = $height;
   	$config['baseHref'] = HTTP_SERVER . DIR_FS_WEB_ROOT;

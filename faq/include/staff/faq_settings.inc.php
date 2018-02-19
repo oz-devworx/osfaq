@@ -9,7 +9,7 @@
 
 
  Tim Gall
- Copyright (c) 2009-2013 osfaq.oz-devworx.com.au - All Rights Reserved.
+ Copyright (c) 2009-2018 osfaq.oz-devworx.com.au - All Rights Reserved.
  http://osfaq.oz-devworx.com.au
 
  This file is part of osFaq.
@@ -224,11 +224,9 @@ if ($messageHandler->size() > 0) echo $messageHandler->output();
 
 
 		        case 'wysiwyg_theme':
-		        	// TODO: put these hardcoded wysiwyg theme names somewhere else.
-		        	$wysiwyg_tb_list = array();
-		        	$wysiwyg_tb_list[] = array('id' => 'Kama', 'text' => 'Kama');
-		        	$wysiwyg_tb_list[] = array('id' => 'Moono', 'text' => 'Moono');
-		        	$valueEditor = OSF_FS_WYSIWYG_THEME . $faqForm->pulldown_menu('key_value', $wysiwyg_tb_list, $fsInfo->key_value, '', true) . '<br />';
+
+		        	// Dynamically find theme names in the WYSIWYG themes folder
+		        	$valueEditor = OSF_FS_WYSIWYG_THEME . $faqForm->pulldown_menu('key_value', FaqSettings::findThemes(), $fsInfo->key_value, '', true) . '<br />';
 		          break;
 
 
@@ -282,10 +280,8 @@ JSF;
 
 		        case 'recaptcha_theme':
 		          $recap_themes = array();
-		          $recap_themes[] = array('id' => 'red', 'text' => OSF_RED);
-		          $recap_themes[] = array('id' => 'white', 'text' => OSF_WHITE);
-		          $recap_themes[] = array('id' => 'blackglass', 'text' => OSF_BLACK_GLASS);
-		          $recap_themes[] = array('id' => 'clean', 'text' => OSF_CLEAN);
+		          $recap_themes[] = array('id' => 'dark', 'text' => OSF_DARK);
+		          $recap_themes[] = array('id' => 'light', 'text' => OSF_LIGHT);
 
 		          $valueEditor = $faqForm->pulldown_menu('key_value', $recap_themes, $fsInfo->key_value, '', true);
 

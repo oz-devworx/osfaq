@@ -260,6 +260,50 @@ class FaqAdmin {
     return $faqs_count;
   }
 
+
+  /**
+   * Generates a html interactive status button designed for AJAX calls.
+   *
+   * @param boolean $status - true for ON button, false for OFF button
+   * @param string $url - url to be used for changing status
+   * @param string $anchor_name - name of any related anchor EG: fid69
+   * @return string - a html status button
+   */
+  function draw_status_button($status, $url, $anchor_name=''){
+  	if($status){
+  		return '<a class="status_on" onclick="updStatus(\'' . $url . '\')" href="#' . $anchor_name . '">' . self::draw_icon(OSF_ICON_CHECKED, '', null, OSF_TIP_STATUS_RED_LIGHT) . '</a>';
+  	} else {
+  		return '<a class="status_off" onclick="updStatus(\'' . $url . '\')" href="#' . $anchor_name . '">' . self::draw_icon(OSF_ICON_CHECK_EMPTY, '', null, OSF_TIP_STATUS_GREEN_LIGHT) . '</a>';
+  	}
+  }
+
+  /**
+   * Font Awesome icon builder. Could also be applied to other font icon variants.
+   *
+   * @param string $icon_name - REQUIRED: The icons name. EG: icon-user
+   * @param string $icon_classes - space seperated icon classes. EG: icon-2x icon-muted
+   * @param string $xtra_classes - space seperated additional custom style classes.
+   * @param string $icon_title - tooltip text
+   * @return string - a html font icon for imbedding in pages.
+   */
+  function draw_icon($icon_name, $icon_classes = null, $xtra_classes = null, $icon_title = null){
+  	$icon = '<i class="' . $icon_name;
+
+  	if(!empty($icon_classes)){
+  		$ic_classes = explode(' ', $icon_classes);
+  		foreach($ic_classes as $iclass)
+  			$icon .= $iclass;
+  	}
+  	$icon .= (!empty($xtra_classes) ? ' ' . $xtra_classes : '') . '"';
+
+  	$icon .= (!empty($icon_title) ? ' title="' . $icon_title . '"' : '');
+
+  	$icon .= '></i>';
+
+  	return $icon;
+  }
+
+
   /**
    * FaqAdmin::set_status()
    *

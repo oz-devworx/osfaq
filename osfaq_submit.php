@@ -51,21 +51,18 @@ $faqForm = new FaqForm;
 $error = false;
 
 if(OSFDB_RECAPTCHA_ENABLE=='true'){
-  require_once(DIR_FAQ_INCLUDES . 'recaptchalib.php');
 
-  // the response from reCAPTCHA
-  $recaptcha_resp = null;
-  // the error code from reCAPTCHA, if any
-  $recaptcha_error = null;
-
-
-  // run the same checks as the recaptchalib so we can use a system message
+  // run simillar checks to the old recaptchalib so we can use a system message
   if(!defined('OSFDB_RECAPTCHA_PUBLIC_KEY') || OSFDB_RECAPTCHA_PUBLIC_KEY == null || OSFDB_RECAPTCHA_PUBLIC_KEY == ''
   || !defined('OSFDB_RECAPTCHA_PRIVATE_KEY') || OSFDB_RECAPTCHA_PRIVATE_KEY == null || OSFDB_RECAPTCHA_PRIVATE_KEY == '') {
 
     $messageHandler->add(sprintf(OSFR_TO_USE_RECAPTCHA, '<a href="https://www.google.com/recaptcha/admin/create?domains='.SERVER_DOMAIN.'&app=osfaq" target="_blank">https://www.google.com/recaptcha/admin/create</a>'), FaqMessage::$warning);
     $error = true;
     $hide_recaptcha = true;
+  }else{
+  	require_once(DIR_FAQ_INCLUDES . 'Recaptcha.php');
+
+  	$ost->addExtraHeader( RecaptchaV2Lib::get_recaptcha_js(true) );
   }
 }
 
@@ -84,18 +81,18 @@ if (isset($_GET['action']) && ($_GET['action'] == 'send') && (OSFDB_USER_SUBMITS
 
 
 
-  // validate email address
-  $regexp = "/^[^0-9][A-z0-9_\-\.]+([.][A-z0-9_\-\.]+)*[@][A-z0-9_\-\.]+([.][A-z0-9_]+)*[.][A-z]{2,4}$/";
-
-  if(!preg_match($regexp, $email)) {
-    $error = true;
-    $messageHandler->add(OSF_CHECK_EMAIL);
-  }
-
-  if(strlen(trim($name)) < 2) {
-    $error = true;
-    $messageHandler->add(OSF_CHECK_NAME);
-  }
+//   // validate email address
+//  $regexp = "/^[^@]+@[^@]+$/";// Super basic. Avoids false positives with new TLD's (Edit: Tim Gall, 2017-04-20)
+//
+//   if(!preg_match($regexp, $email)) {
+//     $error = true;
+//     $messageHandler->add(OSF_CHECK_EMAIL);
+//   }
+//
+//   if(strlen(trim($name)) < 2) {
+//     $error = true;
+//     $messageHandler->add(OSF_CHECK_NAME);
+//   }
 
   //TODO: add admin option to allow empty question
   if(!FaqFuncs::not_null($faq_question) && !FaqFuncs::not_null($faq_answer)) {
@@ -104,25 +101,7 @@ if (isset($_GET['action']) && ($_GET['action'] == 'send') && (OSFDB_USER_SUBMITS
   }
 
   if(OSFDB_RECAPTCHA_ENABLE=='true'){
-    // was there a reCAPTCHA response?
-    if ($_POST["recaptcha_response_field"]) {
-      $recaptcha_resp = recaptcha_check_answer (
-            OSFDB_RECAPTCHA_PRIVATE_KEY,
-            $_SERVER["REMOTE_ADDR"],
-            $_POST["recaptcha_challenge_field"],
-            $_POST["recaptcha_response_field"]);
-
-      if (!$recaptcha_resp->is_valid) {
-        // set the error code so that we can display it
-        $recaptcha_error = $recaptcha_resp->error;
-        $error = true;
-        $messageHandler->add(OSFR_ERROR);
-      }
-    }else{
-      // reCAPTCHA response was empty
-      $error = true;
-      $messageHandler->add(OSFR_ERROR);
-    }
+    $error = RecaptchaV2Lib::validate_recaptcha_response();
   }
 
   if(!$error) {
@@ -299,14 +278,9 @@ if(OSFDB_WYSIWYG_CLIENT=='true' && is_dir(OSF_DOC_ROOT . DIR_FS_WEB_ROOT . 'faq/
   <tr>
     <td>
 <?php
-if(OSFDB_RECAPTCHA_ENABLE=='true'){
-  // Dont show a broken box if the public or private key is not defined.
-  if(!$hide_recaptcha) {
-    require_once(DIR_FAQ_INCLUDES . 'Recaptcha.php');
-    RecaptchaI18nBox::draw_recaptcha_box(OSFDB_RECAPTCHA_THEME);
-  }
-
-  echo recaptcha_get_html(OSFDB_RECAPTCHA_PUBLIC_KEY, $recaptcha_error, (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on'));
+// Dont show a broken box if the public or private key is not defined.
+if( (OSFDB_RECAPTCHA_ENABLE=='true') && !$hide_recaptcha ){
+  RecaptchaV2Lib::draw_recaptcha_box(OSFDB_RECAPTCHA_THEME);
 }
 ?>
     </td>

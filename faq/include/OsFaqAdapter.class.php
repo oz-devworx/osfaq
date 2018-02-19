@@ -232,6 +232,8 @@ delete $.pjax;
 				$inc = FILE_FAQ_MAP_BUILDER;
 			} elseif (isset($_GET['versioncheck']) && $_GET['versioncheck'] == 'true') {
 				$inc = FILE_FAQ_VERSION_CHECK;
+			} elseif (isset($_GET['migrate']) && $_GET['migrate'] == 'true') {
+				$inc = FILE_FAQ_MIGRATE;
 			} else {
 				$inc = FILE_FAQ_ADMIN_INC;
 				$admin_active = true;
@@ -242,6 +244,7 @@ delete $.pjax;
 
 			if($osf_isAdmin){
 				$nav->addSubMenu(array('desc' => OSF_PAGE_FAQ_SETTINGS, 'href' => FILE_FAQ_ADMIN . '?settings=true', 'iconclass' => 'osf_settings'), isset($_GET['settings']));
+				$nav->addSubMenu(array('desc' => OSF_PAGE_FAQ_MIGRATE, 'href' => FILE_FAQ_ADMIN . '?migrate=true', 'iconclass' => 'osf_settings'), isset($_GET['migrate']));
 				$nav->addSubMenu(array('desc' => OSF_PAGE_FAQ_UPLOADS, 'href' => FILE_FAQ_ADMIN . '?uploads=true', 'iconclass' => 'osf_cleaner'), isset($_GET['uploads']));
 			}
 
@@ -308,6 +311,23 @@ delete $.pjax;
 		return $osf_external_info;
 	}
 
+	/**
+	 * Format html containing inline images stored in other fashions than the current osFAQ default (such as databases, etc).
+	 * @param string $htmlText
+	 * @return string
+	 */
+	function fetch_inline_images($htmlText){
+		return Format::viewableImages($htmlText);
+	}
 
+
+	/**
+	 * Format html containing inline images stored in other fashions than the current osFAQ default (such as databases, etc).
+	 * @param string $htmlText
+	 * @return string
+	 */
+	function store_inline_images($htmlText){
+		return Format::localizeInlineImages($htmlText);
+	}
 }
 ?>
