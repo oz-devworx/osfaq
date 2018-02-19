@@ -17,7 +17,7 @@
 define('OSFI_INTRO_INTRO', 'Introducción');
 define('OSFI_INTRO_LOGO', 'osFaq Logo');
 
-define('OSFI_INTRO_WELCOME', '<p>Bienvenido al instalador para osFaq v%s.<br />Esto es un modulo de <span title="Preguntas Frecuentes"><u>FAQ</u></span> para <a href="http://osticket.com/" target="_blank">osTicket v1.7 RC5 - v1.7 STABLE</a>.</p>
+define('OSFI_INTRO_WELCOME', '<p>Bienvenido al instalador para osFaq v%s.<br />Esto es un modulo de <span title="Preguntas Frecuentes"><u>FAQ</u></span> para <a href="http://osticket.com/" target="_blank">osTicket v1.7 RC5 - v1.10.x</a>.</p>
 <p>osFaq es un software de código abierto publicado bajo la GPLv3.<br />
 osFaq está escrito y mantenido por <a href="http://oz-devworx.users.sourceforge.net/" target="_blank">oz-devworx</a>.<br />
 Traducción Español por <a href="http://elartedeganar.com" title="Sitio Web" target="_blank">Francisco Flores</a>.<br />

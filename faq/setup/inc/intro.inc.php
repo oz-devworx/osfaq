@@ -38,7 +38,11 @@ function find_old_versions() {
 
 		$result = db_query("SELECT key_value FROM " . TABLE_FAQ_ADMIN . " WHERE key_name LIKE 'DB_FAQ_VERSION';");
 		if ($temp_data = db_fetch_array($result)) {
-			if($temp_data['key_value']=='1.2.2 ST'){
+			if($temp_data['key_value']=='1.3.0 ST'){
+				// version 1.3.0 ST
+				$old_version = 13;
+
+			}elseif($temp_data['key_value']=='1.2.2 ST'){
 				// version 1.2.2 ST
 				$old_version = 12;
 
@@ -410,6 +414,18 @@ switch($oldver){
   break;
 
   case 12:
+	// enable 1.2.2st to current upgrade
+	?>
+<h3><?php echo sprintf(OSFI_INTRO_V_DETECTED, 'osFaq v1.2.2 ST'); ?></h3>
+<form action="upgrade.php" method="get" enctype="text/plain">
+  <input type="hidden" name="faq_step" value="1" />
+  <input type="hidden" name="upgrade_rc" value="12" />
+  <input type="submit" value="<?php echo sprintf(OSFI_INTRO_UPG_TO, '1.2.2.st', FAQ_VERSION); ?>" />
+</form>
+<?php
+  break;
+
+  case 13:
 ?>
 <div class="messageHandlerError"><img src="images/error.gif" alt="<?php echo OSFI_WARNING; ?>" />
 <?php

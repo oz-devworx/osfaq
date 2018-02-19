@@ -17,7 +17,7 @@
 define('OSFI_INTRO_INTRO', 'Einführung');
 define('OSFI_INTRO_LOGO', 'osFaq Logo');
 
-define('OSFI_INTRO_WELCOME', '<p>Willkommen im Installationsassistenten für osFaq v%s. Dies ist eine <span title="Häufig gestellte Fragen"><u>FAQ</u></span>-Plugin-Modul für <a href="http://osticket.com/" target="_blank">osTicket v1.7 RC5 - v1.7 STABLE</a>.</p><p>osFaq ist Open Source Software unter der GPLv3 veröffentlicht.<br />
+define('OSFI_INTRO_WELCOME', '<p>Willkommen im Installationsassistenten für osFaq v%s. Dies ist eine <span title="Häufig gestellte Fragen"><u>FAQ</u></span>-Plugin-Modul für <a href="http://osticket.com/" target="_blank">osTicket v1.7 RC5 - v1.10.x</a>.</p><p>osFaq ist Open Source Software unter der GPLv3 veröffentlicht.<br />
   osFaq geschrieben und verwaltet von <a href="http://oz-devworx.users.sourceforge.net/" target="_blank">oz-devworx</a>.<br />
   Deutsche Übersetzungen sowie Installer- und Datenbankübersetzungen von Silvio Paschke.<br />
   Dieser Installationsassistent führt Sie durch den Installationsprozess, um osFaq in Ihrem osTicket System einzurichten und zu betreiben.<br />

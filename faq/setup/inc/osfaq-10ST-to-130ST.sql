@@ -1,4 +1,4 @@
-UPDATE `%TABLE_PREFIX%faq_admin` SET `key_value` = '1.2.2 ST' WHERE `key_name` = 'DB_FAQ_VERSION';
+UPDATE `%TABLE_PREFIX%faq_admin` SET `key_value` = '1.3.0 ST' WHERE `key_name` = 'DB_FAQ_VERSION';
 
 ALTER TABLE `%TABLE_PREFIX%faq_settings_lang` CHANGE `title` `title` VARCHAR( 128 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;
 ALTER TABLE `%TABLE_PREFIX%faq_settings_lang` CHANGE `description` `description` LONGTEXT NULL DEFAULT NULL;

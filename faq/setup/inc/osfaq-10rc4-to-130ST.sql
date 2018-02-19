@@ -1,4 +1,4 @@
-UPDATE `%TABLE_PREFIX%faq_admin` SET `key_value` = '1.2.2 ST' WHERE `key_name` = 'DB_FAQ_VERSION';
+UPDATE `%TABLE_PREFIX%faq_admin` SET `key_value` = '1.3.0 ST' WHERE `key_name` = 'DB_FAQ_VERSION';
 
 DELETE FROM `%TABLE_PREFIX%faq_admin` WHERE `key_name` = 'SM_BASE';
 INSERT INTO `%TABLE_PREFIX%faq_admin` (`key_name`, `key_value`) VALUES
