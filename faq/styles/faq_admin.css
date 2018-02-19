@@ -16,7 +16,7 @@ h1 {font-family: Arial, Helvetica, sans-serif; text-decoration: none; font-weigh
 h2 {font-family: Arial, Helvetica, sans-serif; text-decoration: none; font-weight: bold; color:#006699; font-size: 13px;}
 h2 i{color:#006699;}
 
-td p{font-size: 12px;}
+td p{font-size: 1em;}
 
 .horizontal_rule{border-bottom:2px solid #ccc; width:100%; height:2px; margin:0; padding:0;}
 
@@ -57,6 +57,15 @@ input[type="text"][disabled="disabled"]:focus, input[type="text"][readonly="read
 input[type="text"]:hover, input[type="password"]:hover, textarea:hover, select:hover{background-color:#FFFFCC;}
 input[type="text"]:focus, input[type="password"]:focus, textarea:focus, select:focus{background-color:#FFFFCC;}
 
+
+a.status_on:hover, a.status_off:hover{text-shadow: 1px 1px 0px #666;
+-webkit-transition: all 200ms ease;
+-moz-transition: all 200ms ease;
+-ms-transition: all 200ms ease;
+-o-transition: all 200ms ease;
+transition: all 200ms ease;
+}
+
 /* pagination */
 .paginate_row {padding: 2px 6px 2px 6px; font-family: Arial, Helvetica, sans-serif; background-color:#eee; color:#3a87ad; border:1px solid #ddd;}
 .paginate_top{-webkit-border-radius: 10px 10px 0 0; -khtml-border-radius: 10px 10px 0 0;  -moz-border-radius: 10px 10px 0 0; border-radius: 10px 10px 0 0;}
@@ -65,9 +74,9 @@ input[type="text"]:focus, input[type="password"]:focus, textarea:focus, select:f
 
 .paginate_row i, .paginate_row span.inactive{border-radius: .3em; -khtml-border-radius: .3em; -moz-border-radius: .3em; -webkit-border-radius: .3em;}
 .paginate_row input[type="text"], .paginate_row input[type="password"], .paginate_row textarea, .paginate_row select{padding:0;}
-.paginate {color: #666; font-size: .8em;}
-.current {color: #fff; font-size: .8em;}
-.inactive {color: #aaa; font-size: .8em;}
+.paginate_row .paginate {color: #666; font-size: .8em;}
+.paginate_row .current {color: #fff; font-size: .8em;}
+.paginate_row .inactive {color: #aaa; font-size: .8em;}
 
 i.paginate {border: 1px solid #ccc; padding: 2px 6px 2px 6px; font-weight: bold; font-style:normal; text-decoration: none; color: #2F88D9; background-color:#F7F7F7;}
 
