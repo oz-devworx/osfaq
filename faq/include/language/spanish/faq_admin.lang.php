@@ -17,6 +17,7 @@
 // SHARED MAIN HEADINGS
 define('OSF_PAGE_FAQ', 'Administración');
 define('OSF_PAGE_FAQ_SETTINGS', 'Configuración');
+define('OSF_PAGE_FAQ_MIGRATE', 'Migrate');
 define('OSF_PAGE_FAQ_UPLOADS', 'Gestor de Descarga');
 define('OSF_PAGE_FAQ_SITEMAP', 'Mapa del Sitio xml');
 define('OSF_PAGE_FAQ_VCHECK', 'Versión cheque');

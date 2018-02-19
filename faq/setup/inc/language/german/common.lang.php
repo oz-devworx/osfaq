@@ -45,8 +45,8 @@ define('FAQ_FATAL', '<b style="color:red;">SCHWERER FEHLER</b>: ');
 
 define('ERROR_FILES_MISSING', FAQ_FATAL . 'Bitte überprüfen Sie, ob alle osFaq-Dateien hochgeladen wurden. Manche scheinen zu fehlen.');
 define('ERROR_CANT_GET_PATH', FAQ_FATAL . 'Ich konnte die Dateipfade (%s) nicht auslesen. Wenn Ihre osTicket-Installation funktioniert, müssen Sie einige Dateien manuell bearbeiten, um die korrekte Funktion von osFaq zu gewährleisten.<br />Bitte melden Sie diesen Fehler an die Entwickler.');
-define('ERROR_OST_SETTINGS', FAQ_FATAL . 'Ich konnte die osTicket-Einstellungsdatei nicht laden. Bitte stellen Sie sicher, dass <a href="http://osticket.com/" target="_blank">osTicket v1.7 (ST or RC5)</a> installiert ist.');
+define('ERROR_OST_SETTINGS', FAQ_FATAL . 'Ich konnte die osTicket-Einstellungsdatei nicht laden. Bitte stellen Sie sicher, dass <a href="http://osticket.com/" target="_blank">osTicket >= 1.7</a> installiert ist.');
 define('ERROR_OSF_SETTINGS', FAQ_FATAL . 'Ich konnte die osFaq-Einstellungsdatei nicht laden. Bitte stellen Sie sicher, dass die osFaq-Dateien an den richtigen Ort hoch geladen wurden.');
 define('ERROR_CONNECTION', FAQ_FATAL . 'Kontakt Systemadministrator.<br />Kann die Verbindung zur Datenbank');
-define('ERROR_BROKEN', FAQ_FATAL . 'Das Paket, das Sie zu installieren versuchen, scheint beschädigt zu sein oder kann nicht mit osTicket 1.7 (ST or RC5) installiert werden.');
+define('ERROR_BROKEN', FAQ_FATAL . 'Das Paket, das Sie zu installieren versuchen, scheint beschädigt zu sein oder kann nicht mit osTicket >= 1.7 installiert werden.');
 ?>

@@ -19,6 +19,7 @@
 // SHARED MAIN HEADINGS
 define('OSF_PAGE_FAQ', 'FAQ Admin');
 define('OSF_PAGE_FAQ_SETTINGS', 'FAQ Settings');
+define('OSF_PAGE_FAQ_MIGRATE', 'Migrate');
 define('OSF_PAGE_FAQ_UPLOADS', 'FAQ Upload Manager');
 define('OSF_PAGE_FAQ_SITEMAP', 'xml Sitemap');
 define('OSF_PAGE_FAQ_VCHECK', 'Version Check');

@@ -47,8 +47,8 @@ define('FAQ_FATAL', '<b style="color:red;">FATAL ERROR</b>: ');
 
 define('ERROR_FILES_MISSING', FAQ_FATAL . 'Please check you uploaded all of the osFaq files. Some seem to be missing.');
 define('ERROR_CANT_GET_PATH', FAQ_FATAL . 'I was unable to work out your file paths (%s). If your osTicket installation works, you will need to edit some files manually to configure osFaq to function correctly.<br />Please report this error to the developers.');
-define('ERROR_OST_SETTINGS', FAQ_FATAL . 'Failed to load the osTicket settings file. Please make sure you have installed <a href="http://osticket.com/" target="_blank">osTicket v1.7 (ST or RC5)</a>.');
+define('ERROR_OST_SETTINGS', FAQ_FATAL . 'Failed to load the osTicket settings file. Please make sure you have installed <a href="http://osticket.com/" target="_blank">osTicket >= v1.7</a>.');
 define('ERROR_OSF_SETTINGS', FAQ_FATAL . 'Failed to load the osFaq settings file. Please make sure you uploaded the osFaq files to the correct locations.');
 define('ERROR_CONNECTION', FAQ_FATAL . 'Contact system adminstrator.<br>Unable to connect to the database');
-define('ERROR_BROKEN', FAQ_FATAL . 'The package you are trying to install seems to be broken or is not being installed to osTicket 1.7 (ST or RC5)');
+define('ERROR_BROKEN', FAQ_FATAL . 'The package you are trying to install seems to be broken or is not being installed to osTicket >= 1.7');
 ?>

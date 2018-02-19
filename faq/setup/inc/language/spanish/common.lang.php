@@ -45,8 +45,8 @@ define('FAQ_FATAL', '<b style="color:red;">ERROR FATAL </b>: ');
 
 define('ERROR_FILES_MISSING', FAQ_FATAL . 'Por favor, compruebe que ha cargado todos los archivos de osFaq. Algunos parecen estar ausentes.');
 define('ERROR_CANT_GET_PATH', FAQ_FATAL . 'Soy incapaz de resolver sus rutas de archivos (%s). Si tu instalación de osTicket esta funcionando bien, tendrá que modificar algunos archivos de forma manual para que osFaq funcione correctamente.<br />Por favor, informe de este error a los desarrolladores.');
-define('ERROR_OST_SETTINGS', FAQ_FATAL . 'No se pudo cargar el archivo de configuración de osTicket. Por favor, asegúrate de que tienes instalado <a href="http://osticket.com/" target="_blank">osTicket v1.7 (ST or RC5)</a>.');
+define('ERROR_OST_SETTINGS', FAQ_FATAL . 'No se pudo cargar el archivo de configuración de osTicket. Por favor, asegúrate de que tienes instalado <a href="http://osticket.com/" target="_blank">osTicket >= 1.7</a>.');
 define('ERROR_OSF_SETTINGS', FAQ_FATAL . 'No se pudo cargar el archivo de configuración de osFaq. Por favor, asegúrese de que ha cargado los archivos osFaq en las ubicaciones correctas.');
 define('ERROR_CONNECTION', FAQ_FATAL . 'Póngase en contacto con el administrador del sistema.<br>No se puede conectar a la base de datos');
-define('ERROR_BROKEN', FAQ_FATAL . 'El paquete que está intentando instalar parece estar roto o no se puede instalar en osTicket 1.7 (ST or RC5)');
+define('ERROR_BROKEN', FAQ_FATAL . 'El paquete que está intentando instalar parece estar roto o no se puede instalar en osTicket >= 1.7');
 ?>

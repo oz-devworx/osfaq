@@ -58,8 +58,6 @@ define('OSF_FS_WYSIWYG_THEME', 'Theme: ');
 
 define('OSF_FS_HTACCESS_UPLOAD', 'update .htaccess file: %s');
 
-define('OSF_RED', 'Red');
-define('OSF_WHITE', 'White');
-define('OSF_BLACK_GLASS', 'Black Glass');
-define('OSF_CLEAN', 'Clean');
+define('OSF_DARK', 'Dark');
+define('OSF_LIGHT', 'Light');
 ?>

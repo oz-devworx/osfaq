@@ -28,9 +28,9 @@ define('OSF_TIP_MOVE', 'Move');
 define('OSF_TIP_NEW_CAT', 'New Category');
 define('OSF_TIP_NEW_FAQ', 'New Faq');
 //define('OSF_TIP_STATUS_GREEN', 'Active');
-define('OSF_TIP_STATUS_GREEN_LIGHT', 'Set Active');
+define('OSF_TIP_STATUS_GREEN_LIGHT', 'Click to turn ON');
 //define('OSF_TIP_STATUS_RED', 'Inactive');
-define('OSF_TIP_STATUS_RED_LIGHT', 'Set Inactive');
+define('OSF_TIP_STATUS_RED_LIGHT', 'Click to turn OFF');
 define('OSF_TIP_CLIENT_ENTRY', 'Client submitted entry');
 
 define('OSF_EMPTY_CATEGORY', 'Empty Category');
