@@ -54,6 +54,7 @@ define('FILE_FAQ_MAPPER', 'faq_map_ui.inc.php');
 define('FILE_FAQ_MAP_BUILDER', 'faq_map_builder.inc.php');
 define('FILE_FAQ_NOT_AUTHORISED', 'faq_not_authorised.inc.php');
 define('FILE_FAQ_VERSION_CHECK', 'faq_version_check.inc.php');
+define('FILE_FAQ_MIGRATE', 'faq_migrate.inc.php');
 
 
 /// TABLE AND BUTTON ICONS - Font-Awesome
@@ -123,6 +124,13 @@ if(OSFDB_DISABLE_CLIENT=='true'){
 
 // build the page output
 $inc = $osfAdapter->build_admin_navigation();
+
+// AJAX call
+if( ($inc === FILE_FAQ_ADMIN_INC) && isset($_GET['flag']) && ( isset($_GET['cID']) || isset($_GET['fID']) ) ){
+	require_once (DIR_FAQ_INCLUDES . 'staff/' . $inc);
+	exit();
+}
+
 $osf_external_info = $osfAdapter->build_admin_xtra_headers();
 
 $osfAdapter->get_admin_page_header();

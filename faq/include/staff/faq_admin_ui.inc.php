@@ -8,7 +8,7 @@
 
 
   Tim Gall
-  Copyright (c) 2009-2013 osfaq.oz-devworx.com.au - All Rights Reserved.
+  Copyright (c) 2009-2018 osfaq.oz-devworx.com.au - All Rights Reserved.
   http://osfaq.oz-devworx.com.au
 
   This file is part of osFaq.
@@ -29,7 +29,12 @@ require_once (DIR_FAQ_INCLUDES . 'FaqAdmin.php');
 $FaqCrumb = new FaqCrumb;
 $faqAdmin = new FaqAdmin;
 $pages = new FaqPaginator(FILE_FAQ_ADMIN);
+
+
 require_once (DIR_FAQ_INCLUDES . 'staff/' . FILE_FAQ_ADMIN_WORKER);
+
+// AJAX status/featured js
+echo '<script src="' . DIR_FAQ_INCLUDES . 'js/status.js?ver=1.0.0"></script>';
 
 /// OUTPUT
 // At the moment this only verifies categories.
@@ -213,6 +218,8 @@ if ($action == 'new_category' || $action == 'edit_category') {
 	} else {
 		$fInfo = new FaqArrayData(array());
 	}
+
+	$fInfo->answer = $osfAdapter->fetch_inline_images($fInfo->answer);
 ?>
 
 <?php echo $faqForm->form_open('new_faq', FILE_FAQ_ADMIN, FaqFuncs::get_all_get_params(array('fcPath', 'cID', 'action')) . 'fcPath=' . $fcPath . '&action=new_faq_preview', 'post', 'enctype="multipart/form-data"'); ?>
@@ -470,7 +477,7 @@ if ($action == 'new_category' || $action == 'edit_category') {
   </tr>
   <tr>
     <td><h2><?php echo OSF_A; ?></h2>
-    <?php echo $fInfo->answer; ?></td>
+    <?php echo $osfAdapter->fetch_inline_images($fInfo->answer); ?></td>
   </tr>
 
 
@@ -939,23 +946,33 @@ if ($action == 'new_category' || $action == 'edit_category') {
 			}
 
 
-			$cat_status_color = ($categories['category_status'] == '1') ? OSFDB_ACTIVE_COLOR : OSFDB_INACTIVE_COLOR;
-			if(FaqFuncs::not_null($cat_status_color)) $cat_status_color = 'class="nohover" style="background-color:' . $cat_status_color . ';"';
+// 			$cat_status_color = ($categories['category_status'] == '1') ? OSFDB_ACTIVE_COLOR : OSFDB_INACTIVE_COLOR;
+// 			if(FaqFuncs::not_null($cat_status_color)) $cat_status_color = 'class="nohover" style="background-color:' . $cat_status_color . ';"';
 
-			$cat_featured_color = ($categories['featured'] == '1') ? OSFDB_ACTIVE_COLOR : OSFDB_INACTIVE_COLOR;
-			if(FaqFuncs::not_null($cat_featured_color)) $cat_featured_color = 'class="nohover" style="background-color:' . $cat_featured_color . ';"';
+// 			$cat_featured_color = ($categories['featured'] == '1') ? OSFDB_ACTIVE_COLOR : OSFDB_INACTIVE_COLOR;
+// 			if(FaqFuncs::not_null($cat_featured_color)) $cat_featured_color = 'class="nohover" style="background-color:' . $cat_featured_color . ';"';
 ?>
           <td>
 <?php
 			echo '<a href="' . FaqFuncs::format_url(FILE_FAQ_ADMIN, FaqFuncs::get_all_get_params(array('fcPath', 'cID', 'free_browse', 'pg', 'page')) . $faqAdmin->get_faq_path($categories['id'])) . '">';
+
 			if (isset($cInfo) && is_object($cInfo) && ($categories['id'] == $cInfo->id)) {
-				echo '<i class="'.OSF_ICON_FOLDER_OPEN.'" title="'.OSF_TIP_FOLDER.'"></i>';
+				$fcIcon = OSF_ICON_FOLDER_OPEN;
 			}else{
-				echo '<i class="'.OSF_ICON_FOLDER.'" title="'.OSF_TIP_FOLDER.'"></i>';
+				$fcIcon = OSF_ICON_FOLDER;
 			}
 
-			if($categories['client_entry'] == '1')
-				echo ' <i class="'.OSF_ICON_USER.' icon-large" title="'.OSF_TIP_CLIENT_ENTRY.'"></i>';
+			if($categories['client_entry'] == '1'){
+
+				echo '<span class="icon-stack" title="' . OSF_TIP_FOLDER . ' (' . OSF_TIP_CLIENT_ENTRY . ')" style="width:1em;height:1em;line-height:1em;">';
+				echo '<i class="' . $fcIcon . '" style="opacity: 0.5"></i>';
+				echo '<i class="' . OSF_ICON_USER . ' icon-small"></i>';
+				echo '</span>';
+
+			}else{
+				echo '<i class="' . $fcIcon . '" title="' . OSF_TIP_FOLDER . '"></i>';
+			}
+
 			echo '</a>';
 ?></td>
           <td<?php echo $row_link; ?>>
@@ -964,25 +981,25 @@ if ($action == 'new_category' || $action == 'edit_category') {
 
 ?></td>
 
-          <td align="center" <?php echo $cat_status_color; ?>>
+          <td align="center"><div id="statusboxc<?php echo $categories['id']; ?>">
 <?php
-			$params = FaqFuncs::get_all_get_params(array('fcPath', 'cID', 'action', 'flag', 'pg', 'page')) . 'action=setflag_categories&fcPath=' . $fcPath . '&cID=' . $categories['id'];
 			if ($categories['category_status'] == '1') {
-				echo '<a href="' . FaqFuncs::format_url(FILE_FAQ_ADMIN, $params . '&flag=0') . '">' . '<i class="' . OSF_ICON_CHECKED . '" title="' . OSF_TIP_STATUS_RED_LIGHT . '"></i>' . '</a>';
+				echo $faqAdmin->draw_status_button(true, FaqFuncs::format_url(FILE_FAQ_ADMIN, 'action=setflag_categories&flag=0&cID=' . $categories['id']), 'fcs' . $categories['id']);
 			} else {
-				echo '<a href="' . FaqFuncs::format_url(FILE_FAQ_ADMIN, $params . '&flag=1') . '">' . '<i class="' . OSF_ICON_CHECK_EMPTY . '" title="' . OSF_TIP_STATUS_GREEN_LIGHT . '"></i>' . '</a>';
+				echo $faqAdmin->draw_status_button(false, FaqFuncs::format_url(FILE_FAQ_ADMIN, 'action=setflag_categories&flag=1&cID=' . $categories['id']), 'fcs' . $categories['id']);
 			}
-?></td>
 
-          <td align="center" <?php echo $cat_featured_color; ?>>
+?></div></td>
+
+          <td align="center"><div id="featboxc<?php echo $categories['id']; ?>">
 <?php
-			$params = FaqFuncs::get_all_get_params(array('fcPath', 'cID', 'action', 'flag', 'pg', 'page')) . 'action=setfav_categories&fcPath=' . $fcPath . '&cID=' . $categories['id'];
 			if ($categories['featured'] == '1') {
-				echo '<a href="' . FaqFuncs::format_url(FILE_FAQ_ADMIN, $params . '&flag=0') . '">' . '<i class="' . OSF_ICON_CHECKED . '" title="' . OSF_TIP_STATUS_RED_LIGHT . '"></i>' . '</a>';
+				echo $faqAdmin->draw_status_button(true, FaqFuncs::format_url(FILE_FAQ_ADMIN, 'action=setfav_categories&flag=0&cID=' . $categories['id']), 'fcs' . $categories['id']);
 			} else {
-				echo '<a href="' . FaqFuncs::format_url(FILE_FAQ_ADMIN, $params . '&flag=1') . '">' . '<i class="' . OSF_ICON_CHECK_EMPTY . '" title="' . OSF_TIP_STATUS_GREEN_LIGHT . '"></i>' . '</a>';
+				echo $faqAdmin->draw_status_button(false, FaqFuncs::format_url(FILE_FAQ_ADMIN, 'action=setfav_categories&flag=1&cID=' . $categories['id']), 'fcs' . $categories['id']);
 			}
-?></td>
+
+?></div></td>
 
           <td align="right"<?php echo $row_link; ?>><?php echo $categories['client_views']; ?></td>
 
@@ -1033,24 +1050,34 @@ if ($action == 'new_category' || $action == 'edit_category') {
 				$row_link = ' onclick="document.location.href=\'' . FaqFuncs::format_url(FILE_FAQ_ADMIN, FaqFuncs::get_all_get_params(array('fcPath', 'cID', 'fID', 'action', 'flag', 'read')) . 'fcPath=' . $fcPath . '&fID=' . $fInfo_array['id']) . '\'"';
 			}
 
-			$faq_status_color = ($fInfo_array['faq_active'] == '1') ? OSFDB_ACTIVE_COLOR : OSFDB_INACTIVE_COLOR;
-			if(FaqFuncs::not_null($faq_status_color)) $faq_status_color = 'class="nohover" style="background-color:' . $faq_status_color . ';"';
+// 			$faq_status_color = ($fInfo_array['faq_active'] == '1') ? OSFDB_ACTIVE_COLOR : OSFDB_INACTIVE_COLOR;
+// 			if(FaqFuncs::not_null($faq_status_color)) $faq_status_color = 'class="nohover" style="background-color:' . $faq_status_color . ';"';
 
-			$faq_featured_color = ($fInfo_array['featured'] == '1') ? OSFDB_ACTIVE_COLOR : OSFDB_INACTIVE_COLOR;
-			if(FaqFuncs::not_null($faq_featured_color)) $faq_featured_color = 'class="nohover" style="background-color:' . $faq_featured_color . ';"';
+// 			$faq_featured_color = ($fInfo_array['featured'] == '1') ? OSFDB_ACTIVE_COLOR : OSFDB_INACTIVE_COLOR;
+// 			if(FaqFuncs::not_null($faq_featured_color)) $faq_featured_color = 'class="nohover" style="background-color:' . $faq_featured_color . ';"';
 
 ?>
           <td<?php echo $row_link; ?>>
 <?php
 			echo '<a href="' . FaqFuncs::format_url(FILE_FAQ_ADMIN, FaqFuncs::get_all_get_params(array('fcPath', 'cID', 'fID', 'action', 'flag', 'read')) . 'fcPath=' . $fcPath . '&fID=' . $fInfo_array['id'] . '&action=new_faq_preview&read=only') . '">';
+
 			if (isset($fInfo) && is_object($fInfo) && ($fInfo_array['id'] == $fInfo->id)) {
-				echo '<i class="'.OSF_ICON_PREVIEW_ALT.'" title="'.OSF_TIP_PREVIEW.'"></i>';
+				$fcIcon = OSF_ICON_PREVIEW_ALT;
 			}else{
-				echo '<i class="'.OSF_ICON_PREVIEW.'" title="'.OSF_TIP_PREVIEW.'"></i>';
+				$fcIcon = OSF_ICON_PREVIEW;
 			}
 
-			if($fInfo_array['client_entry'] == '1')
-				echo ' <i class="'.OSF_ICON_USER.' icon-large" title="'.OSF_TIP_CLIENT_ENTRY.'"></i>';
+			if($fInfo_array['client_entry'] == '1'){
+
+				echo '<span class="icon-stack" title="' . OSF_TIP_PREVIEW . ' (' . OSF_TIP_CLIENT_ENTRY . ')" style="width:1em;height:1em;line-height:1em;">';
+				echo '<i class="' . $fcIcon . '" style="opacity: 0.5"></i>';
+				echo '<i class="' . OSF_ICON_USER . ' icon-small"></i>';
+				echo '</span>';
+
+			}else{
+				echo '<i class="' . $fcIcon . '" title="' . OSF_TIP_PREVIEW . '"></i>';
+			}
+
 			echo '</a>';
 ?>
           <td<?php echo $row_link; ?>>
@@ -1058,25 +1085,25 @@ if ($action == 'new_category' || $action == 'edit_category') {
 			echo '&nbsp;' . $fInfo_array['question'];
 ?></td>
 
-          <td align="center" <?php echo $faq_status_color; ?>>
+          <td align="center"><div id="statusbox<?php echo $fInfo_array['id']; ?>">
 <?php
-			$params = FaqFuncs::get_all_get_params(array('fcPath', 'fID', 'action', 'flag', 'read')) . 'action=setflag&fID=' . $fInfo_array['id'] . '&fcPath=' . $fcPath;
 			if ($fInfo_array['faq_active'] == '1') {
-				echo '<a href="' . FaqFuncs::format_url(FILE_FAQ_ADMIN, $params . '&flag=0') . '">' . '<i class="' . OSF_ICON_CHECKED . '" title="' . OSF_TIP_STATUS_RED_LIGHT . '"></i>' . '</a>';
+				echo $faqAdmin->draw_status_button(true, FaqFuncs::format_url(FILE_FAQ_ADMIN, 'action=setflag&flag=0&fID=' . $fInfo_array['id']), 'fs' . $fInfo_array['id']);
 			} else {
-				echo '<a href="' . FaqFuncs::format_url(FILE_FAQ_ADMIN, $params . '&flag=1') . '">' . '<i class="' . OSF_ICON_CHECK_EMPTY . '" title="' . OSF_TIP_STATUS_GREEN_LIGHT . '"></i>' . '</a>';
+				echo $faqAdmin->draw_status_button(false, FaqFuncs::format_url(FILE_FAQ_ADMIN, 'action=setflag&flag=1&fID=' . $fInfo_array['id']), 'fs' . $fInfo_array['id']);
 			}
-?></td>
 
-          <td align="center" <?php echo $faq_featured_color; ?>>
+?></div></td>
+
+          <td align="center"><div id="featbox<?php echo $fInfo_array['id']; ?>">
 <?php
-			$params = FaqFuncs::get_all_get_params(array('fcPath', 'fID', 'action', 'flag', 'read')) . 'action=setfav&fID=' . $fInfo_array['id'] . '&fcPath=' . $fcPath;
 			if ($fInfo_array['featured'] == '1') {
-				echo '<a href="' . FaqFuncs::format_url(FILE_FAQ_ADMIN, $params . '&flag=0') . '">' . '<i class="' . OSF_ICON_CHECKED . '" title="' . OSF_TIP_STATUS_RED_LIGHT . '"></i>' . '</a>';
+				echo $faqAdmin->draw_status_button(true, FaqFuncs::format_url(FILE_FAQ_ADMIN, 'action=setfav&flag=0&fID=' . $fInfo_array['id']), 'fs' . $fInfo_array['id']);
 			} else {
-				echo '<a href="' . FaqFuncs::format_url(FILE_FAQ_ADMIN, $params . '&flag=1') . '">' . '<i class="' . OSF_ICON_CHECK_EMPTY . '" title="' . OSF_TIP_STATUS_GREEN_LIGHT . '"></i>' . '</a>';
+				echo $faqAdmin->draw_status_button(false, FaqFuncs::format_url(FILE_FAQ_ADMIN, 'action=setfav&flag=1&fID=' . $fInfo_array['id']), 'fs' . $fInfo_array['id']);
 			}
-?></td>
+
+?></div></td>
 
           <td align="right"<?php echo $row_link; ?>><?php echo $fInfo_array['client_views']; ?></td>
 

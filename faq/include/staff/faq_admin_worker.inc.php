@@ -35,41 +35,84 @@ $action = (isset($_GET['action']) ? $_GET['action'] : '');
 if (FaqFuncs::not_null($action) && (OSFDB_STAFF_AS_ADMIN=='true' || $osf_isAdmin)) {
   switch ($action) {
 
+
     /// status flag
     case 'setflag':
       if (($_GET['flag'] == '0') || ($_GET['flag'] == '1')) {
         if (isset($_GET['fID'])) {
           $faqAdmin->set_status($_GET['fID'], $_GET['flag']);//faq status
+
+          echo $_GET['fID'] . '_' . '#statusbox';
+
+          if ($_GET['flag'] == '1') {
+          	echo $faqAdmin->draw_status_button(true, FaqFuncs::format_url(FILE_FAQ_ADMIN, 'action=setflag&flag=0&fID=' . $_GET['fID']), 'fs' . $_GET['fID']);
+          } else {
+          	echo $faqAdmin->draw_status_button(false, FaqFuncs::format_url(FILE_FAQ_ADMIN, 'action=setflag&flag=1&fID=' . $_GET['fID']), 'fs' . $_GET['fID']);
+          	echo '_____' . $faqAdmin->draw_status_button(false, FaqFuncs::format_url(FILE_FAQ_ADMIN, 'action=setfav&flag=1&fID=' . $_GET['fID']), 'fs' . $_GET['fID']);
+          }
         }
       }
-      FaqFuncs::redirect(FaqFuncs::format_url(FILE_FAQ_ADMIN, FaqFuncs::get_all_get_params(array('cID', 'action', 'flag')) ));
+      exit();
       break;
+
+
     case 'setflag_categories':
       if (($_GET['flag'] == '0') || ($_GET['flag'] == '1')) {
         if (isset($_GET['cID'])) {
           $faqAdmin->set_cat_status($_GET['cID'], $_GET['flag']);//cat status. also sets all child statuses
+
+          echo 'c' . $_GET['cID'] . '_' . '#statusbox';
+
+          if ($_GET['flag'] == '1') {
+          	echo $faqAdmin->draw_status_button(true, FaqFuncs::format_url(FILE_FAQ_ADMIN, 'action=setflag_categories&flag=0&cID=' . $_GET['cID']), 'fcs' . $_GET['cID']);
+          } else {
+          	echo $faqAdmin->draw_status_button(false, FaqFuncs::format_url(FILE_FAQ_ADMIN, 'action=setflag_categories&flag=1&cID=' . $_GET['cID']), 'fcs' . $_GET['cID']);
+          	echo '_____' . $faqAdmin->draw_status_button(false, FaqFuncs::format_url(FILE_FAQ_ADMIN, 'action=setfav_categories&flag=1&cID=' . $_GET['cID']), 'fcs' . $_GET['cID']);
+          }
         }
       }
-      FaqFuncs::redirect(FaqFuncs::format_url(FILE_FAQ_ADMIN, FaqFuncs::get_all_get_params(array('fID', 'action', 'flag')) ));
+      exit();
       break;
+
+
 
     /// featured flag
     case 'setfav':
       if (($_GET['flag'] == '0') || ($_GET['flag'] == '1')) {
         if (isset($_GET['fID'])) {
           $faqAdmin->set_favorite($_GET['fID'], $_GET['flag']);//faq featured
+
+          echo $_GET['fID'] . '_' . '#featbox';
+
+          if ($_GET['flag'] == '1') {
+          	echo $faqAdmin->draw_status_button(true, FaqFuncs::format_url(FILE_FAQ_ADMIN, 'action=setfav&flag=0&fID=' . $_GET['fID']), 'fs' . $_GET['fID']);
+          } else {
+          	echo $faqAdmin->draw_status_button(false, FaqFuncs::format_url(FILE_FAQ_ADMIN, 'action=setfav&flag=1&fID=' . $_GET['fID']), 'fs' . $_GET['fID']);
+          }
         }
       }
-      FaqFuncs::redirect(FaqFuncs::format_url(FILE_FAQ_ADMIN, FaqFuncs::get_all_get_params(array('cID', 'action', 'flag')) ));
+      exit();
       break;
+
+
     case 'setfav_categories':
       if (($_GET['flag'] == '0') || ($_GET['flag'] == '1')) {
         if (isset($_GET['cID'])) {
           $faqAdmin->set_cat_favorite($_GET['cID'], $_GET['flag']);//cat featured. doesn't affect child statuses
+
+          echo 'c' . $_GET['cID'] . '_' . '#featbox';
+
+          if ($_GET['flag'] == '1') {
+          	echo $faqAdmin->draw_status_button(true, FaqFuncs::format_url(FILE_FAQ_ADMIN, 'action=setfav_categories&flag=0&cID=' . $_GET['cID']), 'fcs' . $_GET['cID']);
+          } else {
+          	echo $faqAdmin->draw_status_button(false, FaqFuncs::format_url(FILE_FAQ_ADMIN, 'action=setfav_categories&flag=1&cID=' . $_GET['cID']), 'fcs' . $_GET['cID']);
+          }
         }
       }
-      FaqFuncs::redirect(FaqFuncs::format_url(FILE_FAQ_ADMIN, FaqFuncs::get_all_get_params(array('fID', 'action', 'flag')) ));
+      exit();
       break;
+
+
 
 
     case 'insert_category':
@@ -105,7 +148,7 @@ if (FaqFuncs::not_null($action) && (OSFDB_STAFF_AS_ADMIN=='true' || $osf_isAdmin
       $faq_id = db_input($_GET['fID'], false);
 
       $sql_data_array = array('question' => strip_tags($_POST['question']),
-                              'answer' => $_POST['answer'],
+                              'answer' => $osfAdapter->store_inline_images($_POST['answer']),
                               'faq_active' => ( ($_POST['faq_active']=='1') ? '1' : '0' ),
                               'name' => $_POST['name'],
                               'email' => $_POST['email'],
