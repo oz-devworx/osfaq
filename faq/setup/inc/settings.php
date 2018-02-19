@@ -7,7 +7,7 @@ This file is required by the installer and the upgrader.
 
 
 Tim Gall
-Copyright (c) 2009-2017 osfaq.oz-devworx.com.au - All Rights Reserved.
+Copyright (c) 2009-2018 osfaq.oz-devworx.com.au - All Rights Reserved.
 http://osfaq.oz-devworx.com.au
 
 This file is part of osFaq.
@@ -42,18 +42,19 @@ session_start();
 
 
 // sql
-define('FAQS_SQL_FILE', 'inc/osfaq-130ST.sql');
-define('FAQS_SQL_UP_FILE_2', 'inc/osfaq-10rc2-to-130ST.sql');
-define('FAQS_SQL_UP_FILE_3', 'inc/osfaq-10rc3-to-130ST.sql');
-define('FAQS_SQL_UP_FILE_4', 'inc/osfaq-10rc4-to-130ST.sql');
-define('FAQS_SQL_UP_FILE_5', 'inc/osfaq-10rc5-to-130ST.sql');
-define('FAQS_SQL_UP_FILE_6', 'inc/osfaq-10rc6-to-130ST.sql');
-define('FAQS_SQL_UP_FILE_7', 'inc/osfaq-10ST-to-130ST.sql');
-define('FAQS_SQL_UP_FILE_8', 'inc/osfaq-11ST-to-130ST.sql');
-define('FAQS_SQL_UP_FILE_9', 'inc/osfaq-12RC-to-130ST.sql');
-define('FAQS_SQL_UP_FILE_10', 'inc/osfaq-12ST-to-130ST.sql');
-define('FAQS_SQL_UP_FILE_11', 'inc/osfaq-121ST-to-130ST.sql');
-define('FAQS_SQL_UP_FILE_12', 'inc/osfaq-122ST-to-130ST.sql');
+define('FAQS_SQL_FILE', 'inc/osfaq-131ST.sql');
+define('FAQS_SQL_UP_FILE_2', 'inc/osfaq-10rc2-to-131ST.sql');
+define('FAQS_SQL_UP_FILE_3', 'inc/osfaq-10rc3-to-131ST.sql');
+define('FAQS_SQL_UP_FILE_4', 'inc/osfaq-10rc4-to-131ST.sql');
+define('FAQS_SQL_UP_FILE_5', 'inc/osfaq-10rc5-to-131ST.sql');
+define('FAQS_SQL_UP_FILE_6', 'inc/osfaq-10rc6-to-131ST.sql');
+define('FAQS_SQL_UP_FILE_7', 'inc/osfaq-10ST-to-131ST.sql');
+define('FAQS_SQL_UP_FILE_8', 'inc/osfaq-11ST-to-131ST.sql');
+define('FAQS_SQL_UP_FILE_9', 'inc/osfaq-12RC-to-131ST.sql');
+define('FAQS_SQL_UP_FILE_10', 'inc/osfaq-12ST-to-131ST.sql');
+define('FAQS_SQL_UP_FILE_11', 'inc/osfaq-121ST-to-131ST.sql');
+define('FAQS_SQL_UP_FILE_12', 'inc/osfaq-122ST-to-131ST.sql');
+define('FAQS_SQL_UP_FILE_13', 'inc/osfaq-130ST-to-131ST.sql');
 
 // configs
 define('ROOT_PATH', '../../');

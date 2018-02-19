@@ -1,21 +1,15 @@
-DROP TABLE IF EXISTS `%TABLE_PREFIX%faq_admin`;
-CREATE TABLE IF NOT EXISTS `%TABLE_PREFIX%faq_admin` (
-  `id` int( 11 ) NOT NULL AUTO_INCREMENT,
-  `key_name` varchar( 32 ) NOT NULL,
-  `key_value` varchar( 255 ) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `key_name` (`key_name`)
-) ENGINE=MYISAM  DEFAULT CHARSET=utf8;
+UPDATE `%TABLE_PREFIX%faq_admin` SET `key_value` = '1.3.1 ST' WHERE `key_name` = 'DB_FAQ_VERSION';
 
-
+DELETE FROM `%TABLE_PREFIX%faq_admin` WHERE `key_name` = 'SM_BASE';
 INSERT INTO `%TABLE_PREFIX%faq_admin` (`key_name`, `key_value`) VALUES
-('DB_FAQ_VERSION', '1.3.0 ST'),
 ('OSFA_SM_TYPE', 'test'),
 ('OSFA_SM_PATH', '/'),
 ('OSFA_SM_IDX', ''),
 ('OSFA_SM_IDX_MAPS', ''),
 ('OSFA_SM_NOTIFY', ''),
 ('OSFA_SM_MAP', 'sitemap.xml');
+
+ALTER TABLE `%TABLE_PREFIX%faq_admin` CHANGE `key_value` `key_value` VARCHAR( 255 ) CHARACTER SET utf8 NOT NULL;
 
 ALTER TABLE `%TABLE_PREFIX%faqs` ADD `upload_text` VARCHAR( 255 ) NULL DEFAULT NULL AFTER `pdfupload`;
 
@@ -39,34 +33,34 @@ DELETE FROM `%TABLE_PREFIX%faq_settings` WHERE `key_name` = 'USE_FANCY_BUTTONS';
 
 UPDATE `%TABLE_PREFIX%faq_settings` SET `key_name` = 'OSFDB_DEFAULT_LANG' WHERE `key_name` = 'DEFAULT_FAQ_LANG'; 
 UPDATE `%TABLE_PREFIX%faq_settings` SET `key_name` = 'OSFDB_ENABLE_SSL' WHERE `key_name` = 'ENABLE_SSL';
+UPDATE `%TABLE_PREFIX%faq_settings` SET `key_name` = 'OSFDB_DEFAULT_IPP' WHERE `key_name` = 'FAQ_DEFAULT_IPP';
 UPDATE `%TABLE_PREFIX%faq_settings` SET `key_name` = 'OSF_ADMIN_HEADING' WHERE `key_name` = 'ADMIN_HEADING';
 UPDATE `%TABLE_PREFIX%faq_settings` SET `key_name` = 'OSFDB_INACTIVE_COLOR' WHERE `key_name` = 'ITEM_INACTIVE_COLOR';
 UPDATE `%TABLE_PREFIX%faq_settings` SET `key_name` = 'OSFDB_ACTIVE_COLOR' WHERE `key_name` = 'ITEM_ACTIVE_COLOR';
 UPDATE `%TABLE_PREFIX%faq_settings` SET `key_name` = 'OSFDB_WYSIWYG_STAFF' WHERE `key_name` = 'WYSIWYG_STAFF';
 UPDATE `%TABLE_PREFIX%faq_settings` SET `key_name` = 'OSF_CLIENT_HEADING' WHERE `key_name` = 'CLIENT_HEADING';
+UPDATE `%TABLE_PREFIX%faq_settings` SET `key_name` = 'OSFDB_CLIENT_PG_STRIP' WHERE `key_name` = 'CLIENT_PG_STRIP';
 UPDATE `%TABLE_PREFIX%faq_settings` SET `key_name` = 'OSFDB_WYSIWYG_CLIENT' WHERE `key_name` = 'WYSIWYG_CLIENT';
 UPDATE `%TABLE_PREFIX%faq_settings` SET `key_name` = 'OSFDB_USER_SUBMITS_ALLOW' WHERE `key_name` = 'ALLOW_USER_SUBMITS';
 UPDATE `%TABLE_PREFIX%faq_settings` SET `key_name` = 'OSFDB_OPTIONAL_FOOTER' WHERE `key_name` = 'OPTIONAL_FAQ_FOOTER';
 UPDATE `%TABLE_PREFIX%faq_settings` SET `key_name` = 'OSFDB_SEARCH_BG_COLOR' WHERE `key_name` = 'SEARCH_BACKGROUND_COLOR';
+UPDATE `%TABLE_PREFIX%faq_settings` SET `key_name` = 'OSF_SEO_HEADING' WHERE `key_name` = 'SEO_HEADING';
 UPDATE `%TABLE_PREFIX%faq_settings` SET `key_name` = 'OSFDB_URL_FRIENDLY' WHERE `key_name` = 'FAQ_URL_FRIENDLY';
+UPDATE `%TABLE_PREFIX%faq_settings` SET `key_name` = 'OSFDB_MAX_URL_LENGTH' WHERE `key_name` = 'MAX_URL_LENGTH';
+UPDATE `%TABLE_PREFIX%faq_settings` SET `key_name` = 'OSFDB_SEO_REMOVE_JOINERS' WHERE `key_name` = 'SEO_REMOVE_JOINERS';
 UPDATE `%TABLE_PREFIX%faq_settings` SET `key_name` = 'OSF_EXT_HEADING' WHERE `key_name` = 'EXT_HEADING';
 UPDATE `%TABLE_PREFIX%faq_settings` SET `key_name` = 'OSFDB_EXT_FAQS_ALLOW' WHERE `key_name` = 'DISPLAY_EXT_FAQS';
 UPDATE `%TABLE_PREFIX%faq_settings` SET `key_name` = 'OSFDB_EXT_LIMIT' WHERE `key_name` = 'EXT_LIMIT';
+UPDATE `%TABLE_PREFIX%faq_settings` SET `key_name` = 'OSFDB_MAX_TXT_LENGTH' WHERE `key_name` = 'MAX_TXT_LENGTH';
 UPDATE `%TABLE_PREFIX%faq_settings` SET `key_name` = 'OSFDB_EXT_FEATURED' WHERE `key_name` = 'EXT_FEATURED';
 UPDATE `%TABLE_PREFIX%faq_settings` SET `key_name` = 'OSFDB_EXT_POPULAR' WHERE `key_name` = 'EXT_POPULAR';
 UPDATE `%TABLE_PREFIX%faq_settings` SET `key_name` = 'OSFDB_EXT_NEW' WHERE `key_name` = 'EXT_NEW';
 
 INSERT INTO `%TABLE_PREFIX%faq_settings` (`key_name`, `key_value`, `field_type`, `sort_order`, `date_added`, `last_modified`) VALUES
 ('OSFDB_TIMEZONE', 'Australia/Brisbane', 'timezone', 3, now(), '0000-00-00 00:00:00'),
-('OSFDB_DEFAULT_IPP', '10', 'textfield', 6, now(), '0000-00-00 00:00:00'),
 ('OSFDB_STAFF_AS_ADMIN', 'false', 'truefalse', 7, now(), '0000-00-00 00:00:00'),
 ('OSFDB_DISABLE_CLIENT', 'false', 'truefalse', 8, now(), '0000-00-00 00:00:00'),
-('OSFDB_CLIENT_PG_STRIP', '3', 'textfield', 36, now(), '0000-00-00 00:00:00'),
 ('OSFDB_USER_ANON', 'false', 'truefalse', 48, now(), '0000-00-00 00:00:00'),
-('OSF_SEO_HEADING', '', 'heading', 59, now(), '0000-00-00 00:00:00'),
-('OSFDB_MAX_URL_LENGTH', '39', 'textfield', 61, now(), '0000-00-00 00:00:00'),
-('OSFDB_SEO_REMOVE_JOINERS', 'true', 'truefalse', 62, now(), '0000-00-00 00:00:00'),
-('OSFDB_MAX_TXT_LENGTH', '43', 'textfield', 77, now(), '0000-00-00 00:00:00'),
 ('OSF_FEED_HEADING', '', 'heading', 100, now(), '0000-00-00 00:00:00'),
 ('OSFDB_FEED_ALLOW', 'true', 'truefalse', 105, now(), '0000-00-00 00:00:00'),
 ('OSFDB_FEED_ATOM', 'true', 'truefalse', 106, now(), '0000-00-00 00:00:00'),

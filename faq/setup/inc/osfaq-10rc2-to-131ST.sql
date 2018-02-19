@@ -111,7 +111,7 @@ CREATE TABLE IF NOT EXISTS `%TABLE_PREFIX%faq_admin` (
 
 
 INSERT INTO `%TABLE_PREFIX%faq_admin` (`key_name`, `key_value`) VALUES
-('DB_FAQ_VERSION', '1.3.0 ST'),
+('DB_FAQ_VERSION', '1.3.1 ST'),
 ('OSFA_SM_TYPE', 'test'),
 ('OSFA_SM_PATH', '/'),
 ('OSFA_SM_IDX', ''),

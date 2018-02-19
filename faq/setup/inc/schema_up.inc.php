@@ -6,7 +6,7 @@
 
 
   Tim Gall
-  Copyright (c) 2009-2017 osfaq.oz-devworx.com.au - All Rights Reserved.
+  Copyright (c) 2009-2018 osfaq.oz-devworx.com.au - All Rights Reserved.
   http://osfaq.oz-devworx.com.au
 
   This file is part of osFaq.
@@ -102,6 +102,12 @@ if(isset($_GET['install_db']) && $_GET['install_db']=='true'){
   		$errorMsg .= ERROR_BROKEN . '<br />';
   		$faq_error = true;
   	}
+  }elseif($_GET['rc_version']=='130ST-to-CURRENT'){
+  	/// Load SQL schema file 1.3.0ST to CURRENT
+  	if (!file_exists(FAQS_SQL_UP_FILE_13) || !($schema = file_get_contents(FAQS_SQL_UP_FILE_13))) {
+  		$errorMsg .= ERROR_BROKEN . '<br />';
+  		$faq_error = true;
+  	}
   }
 
   if (!$faq_error && !empty($schema)) {
@@ -172,7 +178,16 @@ if(isset($_GET['install_db']) && $_GET['install_db']=='true'){
   echo OSFI_UPG_READY_TEXT;
 
 
-  if($_SESSION['upgrade_rc']==12){
+  if($_SESSION['upgrade_rc']==13){
+  	?>
+<form action="upgrade.php" method="get" enctype="text/plain">
+  <input type="hidden" name="faq_step" value="1" />
+  <input type="hidden" name="install_db" value="true" />
+  <input type="hidden" name="rc_version" value="130ST-to-CURRENT" />
+  <input type="submit" value="<?php echo sprintf(OSFI_UPG_FROM_TO, '1.3.0-ST', FAQ_VERSION); ?>" />
+</form>
+<?php
+  }elseif($_SESSION['upgrade_rc']==12){
   	?>
 <form action="upgrade.php" method="get" enctype="text/plain">
   <input type="hidden" name="faq_step" value="1" />

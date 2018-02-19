@@ -10,7 +10,7 @@
 
 
   Tim Gall
-  Copyright (c) 2009-2013 osfaq.oz-devworx.com.au - All Rights Reserved.
+  Copyright (c) 2009-2018 osfaq.oz-devworx.com.au - All Rights Reserved.
   http://osfaq.oz-devworx.com.au
 
   This file is part of osFaq.
@@ -38,7 +38,11 @@ function find_old_versions() {
 
 		$result = db_query("SELECT key_value FROM " . TABLE_FAQ_ADMIN . " WHERE key_name LIKE 'DB_FAQ_VERSION';");
 		if ($temp_data = db_fetch_array($result)) {
-			if($temp_data['key_value']=='1.3.0 ST'){
+			if($temp_data['key_value']=='1.3.1 ST'){
+				// version 1.3.1 ST
+				$old_version = 14;
+
+			}elseif($temp_data['key_value']=='1.3.0 ST'){
 				// version 1.3.0 ST
 				$old_version = 13;
 
@@ -426,6 +430,18 @@ switch($oldver){
   break;
 
   case 13:
+	// enable 1.3.0st to current upgrade
+	?>
+<h3><?php echo sprintf(OSFI_INTRO_V_DETECTED, 'osFaq v1.3.0 ST'); ?></h3>
+<form action="upgrade.php" method="get" enctype="text/plain">
+  <input type="hidden" name="faq_step" value="1" />
+  <input type="hidden" name="upgrade_rc" value="13" />
+  <input type="submit" value="<?php echo sprintf(OSFI_INTRO_UPG_TO, '1.3.0.st', FAQ_VERSION); ?>" />
+</form>
+<?php
+  break;
+
+  case 14:
 ?>
 <div class="messageHandlerError"><img src="images/error.gif" alt="<?php echo OSFI_WARNING; ?>" />
 <?php
