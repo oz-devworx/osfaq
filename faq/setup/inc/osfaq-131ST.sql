@@ -126,7 +126,7 @@ INSERT INTO `%TABLE_PREFIX%osfaq_settings` (`key_name`, `key_value`, `field_type
 ('OSFDB_RECAPTCHA_ENABLE', 'false', 'truefalse', 52, now(), '0000-00-00 00:00:00'), 
 ('OSFDB_RECAPTCHA_PUBLIC_KEY', '', 'textfield', 53, now(), '0000-00-00 00:00:00'),
 ('OSFDB_RECAPTCHA_PRIVATE_KEY', '', 'textfield', 54, now(), '0000-00-00 00:00:00'), 
-('OSFDB_RECAPTCHA_THEME', 'red', 'recaptcha_theme', 55, now(), '0000-00-00 00:00:00'),
+('OSFDB_RECAPTCHA_THEME', 'light', 'recaptcha_theme', 55, now(), '0000-00-00 00:00:00'),
 ('OSFDB_RECAPTCHA_TAB_INDEX', '7', 'textfield', 56, now(), '0000-00-00 00:00:00');
 
 INSERT INTO `%TABLE_PREFIX%osfaq_settings` (`key_name`, `key_value`, `field_type`, `sort_order`, `date_added`, `last_modified`) VALUES
