@@ -56,7 +56,7 @@ from " . TABLE_PREFIX . "faq ostf left join " . TABLE_PREFIX . "faq_category ost
 
 			//dont insert duplicate faqs
 			//XXX: Only check question text for now, since inline images in the answer are modified during the import to avoid breakages.
-			$dup_faq_check = db_query("select id from " . TABLE_FAQS . " where question = '" . $osTicket_data['question'] . "'");
+			$dup_faq_check = db_query("select id from " . TABLE_FAQS . " where question = '" . db_input($osTicket_data['question'], false) . "'");
 			if( db_num_rows($dup_faq_check) > 0 ){
 
 				//notify admin of duplicate and skip this entry
@@ -71,7 +71,7 @@ from " . TABLE_PREFIX . "faq ostf left join " . TABLE_PREFIX . "faq_category ost
 			//dont insert duplicate root level cats.
 			$new_cat_id = 0;// default to root category
 
-			$dup_cat_check = db_query("select id from " . TABLE_FAQCATS . " where category = '" . $osTicket_data['cat_name'] . "' and parent_id = '0'");
+			$dup_cat_check = db_query("select id from " . TABLE_FAQCATS . " where category = '" . db_input($osTicket_data['cat_name'], false) . "' and parent_id = '0'");
 			if( db_num_rows($dup_cat_check) > 0 ){
 				// if category is found in root, then use that ID; otherwise use root
 				$dup_cat_data = db_fetch_array($dup_cat_check);
