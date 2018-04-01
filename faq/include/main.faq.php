@@ -6,7 +6,7 @@
 
 
   Tim Gall
-  Copyright (c) 2009-2013 osfaq.oz-devworx.com.au - All Rights Reserved.
+  Copyright (c) 2009-2018 osfaq.oz-devworx.com.au - All Rights Reserved.
   http://osfaq.oz-devworx.com.au
 
   This file is part of osFaq.
@@ -16,7 +16,9 @@
 
 ************************************************************************* */
 
-// this is the only constant in this file
+define('FAQ_VERSION','1.4.0 ST');//don't change this. Changes from version to version.
+define('FAQ_CK_VERSION', '4_8_0');//ckeditor path constant.
+
 define('DIR_PATH_ADMIN', 'scp/');// your admin folder (with trailing /)
 
 // see: faq/include/OsFaqAdapter.class.php for details
@@ -36,7 +38,7 @@ if(!function_exists('gzdecode')){
  * Path cleaner mainly for cross platform path stability.
  *
  * @param string $pathString a file path. Can be relative or absolute.
- * @return A path with web style separators
+ * @return string A path with web style separators
  */
 function osfMain_cleanPath($pathString){
   //change windows seperators
