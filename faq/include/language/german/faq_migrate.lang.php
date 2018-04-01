@@ -21,18 +21,19 @@ define('OSF_MIGRATE_FAQS_IMPORTED', 'FAQs imported %s');
 define('OSF_MIGRATE_FAQS_IGNORED', 'Duplicate FAQs ignored %s');
 
 define('OSF_MIGRATE_HEADING', 'Migration Options');
-define('OSF_OST2OSF_HEADING', 'Copy FAQs from osTicket');
-define('OSF_OSF2OST_HEADING', 'Copy FAQs from osFAQ');
+define('OSF_OST2OSF_HEADING', 'Ready to Copy FAQs from osTicket');
+define('OSF_OSF2OST_HEADING', 'Ready to Copy FAQs from osFAQ');
 
-define('OSF_OST2OSF_DESCRIPTION', 'Copy FAQs and Categories from osTicket-KB to osFAQ. Duplicates will be ignored.<br><br>
+define('OSF_OST2OSF_DESCRIPTION', 'Copy FAQs and Categories from osTicket-KB to osFAQ.<br><br>
 FAQs and categories set as private or un-published in osTicket-KB will be set to disabled (hidden) in osFAQ.');
 
 define('OSF_OST2OSF', 'Copy FAQs from osTicket-KB to osFAQ');
-define('OSF_OST2OSF_CONFIRM', 'Click to confirm: Copy FAQs from osTicket-KB to osFAQ');
+define('OSF_IMPORT_NOW', 'Import now');
 
-define('OSF_OSF2OST_DESCRIPTION', 'Copy FAQs and Categories from osFAQ  to osTicket-KB. Duplicates will be ignored.');
+define('OSF_OSF2OST_DESCRIPTION', 'Copy FAQs and Categories from osFAQ  to osTicket-KB.');
 define('OSF_OSF2OST', 'Copy FAQs from osFAQ to osTicket-KB');
-define('OSF_OSF2OST_CONFIRM', 'Click to confirm: Copy FAQs from osFAQ to osTicket-KB');
+
+define('OSF_COPY_FAQ', 'Import FAQs');
 
 define('OSF_MIGRATE_DESCRIPTION', 'Copy FAQs and Categories from one FAQ manager system to another.');
 
