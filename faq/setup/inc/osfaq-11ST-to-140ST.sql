@@ -1,4 +1,4 @@
-UPDATE `%TABLE_PREFIX%faq_admin` SET `key_value` = '1.3.1 ST' WHERE `key_name` = 'DB_FAQ_VERSION';
+UPDATE `%TABLE_PREFIX%faq_admin` SET `key_value` = '1.4.0 ST' WHERE `key_name` = 'DB_FAQ_VERSION';
 
 UPDATE `%TABLE_PREFIX%faq_settings` SET `sort_order` = 28 WHERE `key_name` = 'OSFDB_WYSIWYG_STAFF';
 UPDATE `%TABLE_PREFIX%faq_settings` SET `sort_order` = 49 WHERE `key_name` = 'OSFDB_WYSIWYG_CLIENT';
@@ -25,6 +25,8 @@ ALTER TABLE `%TABLE_PREFIX%osfaq_categories` CHANGE `show_on_nonfaq` `featured` 
 
 ALTER TABLE `%TABLE_PREFIX%osfaq` ADD `client_entry` SMALLINT( 1 ) NOT NULL DEFAULT '0' AFTER `client_views`;
 ALTER TABLE `%TABLE_PREFIX%osfaq_categories` ADD `client_entry` SMALLINT( 1 ) NOT NULL DEFAULT '0' AFTER `client_views`;
+
+ALTER TABLE `%TABLE_PREFIX%osfaq` ADD `canned` SMALLINT(1) NOT NULL DEFAULT '0' AFTER `featured`;
 
 
 ALTER TABLE `%TABLE_PREFIX%osfaq` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;

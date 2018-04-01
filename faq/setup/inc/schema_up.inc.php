@@ -108,6 +108,12 @@ if(isset($_GET['install_db']) && $_GET['install_db']=='true'){
   		$errorMsg .= ERROR_BROKEN . '<br />';
   		$faq_error = true;
   	}
+  }elseif($_GET['rc_version']=='131ST-to-CURRENT'){
+  	/// Load SQL schema file 1.3.1ST to CURRENT
+  	if (!file_exists(FAQS_SQL_UP_FILE_14) || !($schema = file_get_contents(FAQS_SQL_UP_FILE_14))) {
+  		$errorMsg .= ERROR_BROKEN . '<br />';
+  		$faq_error = true;
+  	}
   }
 
   if (!$faq_error && !empty($schema)) {
@@ -178,7 +184,16 @@ if(isset($_GET['install_db']) && $_GET['install_db']=='true'){
   echo OSFI_UPG_READY_TEXT;
 
 
-  if($_SESSION['upgrade_rc']==13){
+  if($_SESSION['upgrade_rc']==14){
+  	?>
+<form action="upgrade.php" method="get" enctype="text/plain">
+  <input type="hidden" name="faq_step" value="1" />
+  <input type="hidden" name="install_db" value="true" />
+  <input type="hidden" name="rc_version" value="131ST-to-CURRENT" />
+  <input type="submit" value="<?php echo sprintf(OSFI_UPG_FROM_TO, '1.3.1-ST', FAQ_VERSION); ?>" />
+</form>
+<?php
+  }elseif($_SESSION['upgrade_rc']==13){
   	?>
 <form action="upgrade.php" method="get" enctype="text/plain">
   <input type="hidden" name="faq_step" value="1" />
