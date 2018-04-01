@@ -114,6 +114,27 @@ if (FaqFuncs::not_null($action) && (OSFDB_STAFF_AS_ADMIN=='true' || $osf_isAdmin
 
 
 
+    /// canned flag
+    case 'setcan':
+      if (($_GET['flag'] == '0') || ($_GET['flag'] == '1')) {
+        if (isset($_GET['fID'])) {
+          $faqAdmin->set_canned($_GET['fID'], $_GET['flag']);//faq canned-response
+
+          echo $_GET['fID'] . '_' . '#canbox';
+
+          if ($_GET['flag'] == '1') {
+          	echo $faqAdmin->draw_status_button(true, FaqFuncs::format_url(FILE_FAQ_ADMIN, 'action=setcan&flag=0&fID=' . $_GET['fID']), 'fs' . $_GET['fID']);
+          } else {
+          	echo $faqAdmin->draw_status_button(false, FaqFuncs::format_url(FILE_FAQ_ADMIN, 'action=setcan&flag=1&fID=' . $_GET['fID']), 'fs' . $_GET['fID']);
+          }
+        }
+      }
+      exit();
+      break;
+
+
+
+
 
     case 'insert_category':
     case 'update_category':
