@@ -229,11 +229,14 @@ if ($action == 'migrate_from_ost') {
 // 	$import_type[] = array('id' => 'migrate_to_ost', 'text' => OSF_OSF2OST);
 
 	$q_limits = array();
+	$q_limits[] = array('id' => '10', 'text' => '10');
 	$q_limits[] = array('id' => '50', 'text' => '50');
 	$q_limits[] = array('id' => '100', 'text' => '100');
 	$q_limits[] = array('id' => '250', 'text' => '250');
 	$q_limits[] = array('id' => '500', 'text' => '500');
-	$q_limits[] = array('id' => '1500', 'text' => '1500');
+	$q_limits[] = array('id' => '1500', 'text' => '1,500');
+	$q_limits[] = array('id' => '5000', 'text' => '5,000');
+	$q_limits[] = array('id' => '10000', 'text' => '10,000');
 	$q_limits[] = array('id' => 'none', 'text' => 'No Limit');
 
 	$qty_limit = ( isset($_POST['qty_limit']) ? $_POST['qty_limit'] : 'none' );
