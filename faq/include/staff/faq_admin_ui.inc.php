@@ -639,6 +639,7 @@ if ($action == 'new_category' || $action == 'edit_category') {
 	$shd_status = $shd_name;
 	$shd_feature = $shd_name;
 	$shd_views = $shd_name;
+	$shd_can = $shd_name;
 
 	$osf_cat_order = ' order by ';
 	$osf_faq_order = ' order by ';
@@ -659,6 +660,13 @@ if ($action == 'new_category' || $action == 'edit_category') {
 			$osf_faq_order .= 'f.featured ' . $sort_direction . ', f.question ASC';
 			$shd_feature = $direction_char;
 			break;
+
+		case 'can':
+			$osf_cat_order .= 'fc.category ASC';// no canned status on cats
+			$osf_faq_order .= 'f.canned ' . $sort_direction . ', f.question ASC';
+			$shd_can = $direction_char;
+			break;
+
 		case 'name':
 		default:
 			$osf_cat_order .= 'fc.category ' . $sort_direction;
@@ -912,6 +920,7 @@ if ($action == 'new_category' || $action == 'edit_category') {
           <th><?php echo '<a href="' . FaqFuncs::format_url(FILE_FAQ_ADMIN, $sort_params . 'sort_by=name&direction='.$alt_direction) . '">'.OSF_HEAD_CATS_FAQS.$shd_name.'</a>'; ?></th>
           <th align="center" width="<?php echo $osf_th_width; ?>"><?php echo '<a href="' . FaqFuncs::format_url(FILE_FAQ_ADMIN, $sort_params . 'sort_by=status&direction='.$alt_direction) . '">'.OSF_HEAD_STATUS.$shd_status.'</a>'; ?></th>
           <th align="center" width="<?php echo $osf_th_width; ?>"><?php echo '<a href="' . FaqFuncs::format_url(FILE_FAQ_ADMIN, $sort_params . 'sort_by=feature&direction='.$alt_direction) . '">'.OSF_HEAD_FEATURED.$shd_feature.'</a>'; ?></th>
+          <th align="center" width="<?php echo $osf_th_width; ?>"><?php echo '<a href="' . FaqFuncs::format_url(FILE_FAQ_ADMIN, $sort_params . 'sort_by=can&direction='.$alt_direction) . '">'.OSF_HEAD_CAN.$shd_can.'</a>'; ?></th>
           <th align="center" width="<?php echo $osf_th_width; ?>"><?php echo '<a href="' . FaqFuncs::format_url(FILE_FAQ_ADMIN, $sort_params . 'sort_by=views&direction='.$alt_direction) . '">'.OSF_HEAD_VIEWS.$shd_views.'</a>'; ?></th>
           <th align="right" width="5%"><?php echo OSF_HEAD_ACTION; ?>&nbsp;</th>
         </tr>
@@ -1001,6 +1010,8 @@ if ($action == 'new_category' || $action == 'edit_category') {
 
 ?></div></td>
 
+          <td align="center">-</td>
+
           <td align="right"<?php echo $row_link; ?>><?php echo $categories['client_views']; ?></td>
 
           <td align="right">
@@ -1029,7 +1040,7 @@ if ($action == 'new_category' || $action == 'edit_category') {
 ////////////////////////////////////////////////////////////////////
 	if($cffilter !== 0){
 
-		$fInfo_query = db_query("select f.id, f.question, f.answer, f.faq_active, f.featured, f.client_views, f.client_entry, f.date_added, f.last_modified, f.name, f.email, f.phone, f.pdfupload, f.upload_text, f2f.faqcategory_id from " . TABLE_FAQS . " f, " . TABLE_FAQS2FAQCATS . " f2f where f.id = f2f.faq_id " . $osf_faq_filter_sql . $osf_faq_order . $osf_faq_limit_sql);
+		$fInfo_query = db_query("select f.id, f.question, f.answer, f.faq_active, f.featured, f.canned, f.client_views, f.client_entry, f.date_added, f.last_modified, f.name, f.email, f.phone, f.pdfupload, f.upload_text, f2f.faqcategory_id from " . TABLE_FAQS . " f, " . TABLE_FAQS2FAQCATS . " f2f where f.id = f2f.faq_id " . $osf_faq_filter_sql . $osf_faq_order . $osf_faq_limit_sql);
 
 		while ($fInfo_array = db_fetch_array($fInfo_query)) {
 			$faq_count++;
@@ -1101,6 +1112,16 @@ if ($action == 'new_category' || $action == 'edit_category') {
 				echo $faqAdmin->draw_status_button(true, FaqFuncs::format_url(FILE_FAQ_ADMIN, 'action=setfav&flag=0&fID=' . $fInfo_array['id']), 'fs' . $fInfo_array['id']);
 			} else {
 				echo $faqAdmin->draw_status_button(false, FaqFuncs::format_url(FILE_FAQ_ADMIN, 'action=setfav&flag=1&fID=' . $fInfo_array['id']), 'fs' . $fInfo_array['id']);
+			}
+
+?></div></td>
+
+          <td align="center"><div id="canbox<?php echo $fInfo_array['id']; ?>">
+<?php
+			if ($fInfo_array['canned'] == '1') {
+				echo $faqAdmin->draw_status_button(true, FaqFuncs::format_url(FILE_FAQ_ADMIN, 'action=setcan&flag=0&fID=' . $fInfo_array['id']), 'fcrs' . $fInfo_array['id']);
+			} else {
+				echo $faqAdmin->draw_status_button(false, FaqFuncs::format_url(FILE_FAQ_ADMIN, 'action=setcan&flag=1&fID=' . $fInfo_array['id']), 'fcrs' . $fInfo_array['id']);
 			}
 
 ?></div></td>

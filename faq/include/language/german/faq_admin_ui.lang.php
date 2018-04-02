@@ -56,6 +56,7 @@ define('OSF_HEAD_INFO_DELETE_FAQ', 'Lösche FAQ-Eintrag');
 define('OSF_HEAD_VIEWS', 'Ansichten');
 define('OSF_HEAD_SORT_ASC', 'Aufsteigend sortieren');
 define('OSF_HEAD_SORT_DESC', 'Sortieren absteigend');
+define('OSF_HEAD_CAN', 'Canned');
 
 define('OSF_ANY_STATUS', 'Jeder Status');
 

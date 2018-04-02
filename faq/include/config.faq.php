@@ -9,7 +9,7 @@
 
 
   Tim Gall
-  Copyright (c) 2009-2017 osfaq.oz-devworx.com.au - All Rights Reserved.
+  Copyright (c) 2009-2018 osfaq.oz-devworx.com.au - All Rights Reserved.
   http://osfaq.oz-devworx.com.au
 
   This file is part of osFaq.
@@ -18,9 +18,6 @@
   For licensing, see LICENSE.html or http://osfaq.oz-devworx.com.au/license
 
 ************************************************************************* */
-
-define('FAQ_VERSION','1.3.1 ST');//don't change this. Changes from version to version.
-define('FAQ_CK_VERSION', '4_8_0');//ckeditor path constant.
 
 // eg: yourdomain.com OR www.yourdomain.com OR yoursubdomain.yourdomain.com ETC.
 define('SERVER_DOMAIN', $_SERVER['SERVER_NAME']);

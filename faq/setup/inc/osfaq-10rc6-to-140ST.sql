@@ -1,9 +1,13 @@
-UPDATE `%TABLE_PREFIX%faq_admin` SET `key_value` = '1.3.1 ST' WHERE `key_name` = 'DB_FAQ_VERSION';
-
-ALTER TABLE `%TABLE_PREFIX%faq_settings_lang` CHANGE `title` `title` VARCHAR( 128 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;
-ALTER TABLE `%TABLE_PREFIX%faq_settings_lang` CHANGE `description` `description` LONGTEXT NULL DEFAULT NULL;
+UPDATE `%TABLE_PREFIX%faq_admin` SET `key_value` = '1.4.0 ST' WHERE `key_name` = 'DB_FAQ_VERSION';
 
 ALTER TABLE `%TABLE_PREFIX%faqs` ADD `upload_text` VARCHAR( 255 ) NULL DEFAULT NULL AFTER `pdfupload`;
+
+ALTER TABLE `%TABLE_PREFIX%faq_settings` CHANGE `key_value` `key_value` LONGTEXT NOT NULL DEFAULT '';
+ALTER TABLE `%TABLE_PREFIX%faq_settings` DROP `title`;
+ALTER TABLE `%TABLE_PREFIX%faq_settings` DROP `description`;
+
+DELETE FROM `%TABLE_PREFIX%faq_settings` WHERE `key_name` = 'OSFDB_IMAGE_UPLOAD_MAX';
+DELETE FROM `%TABLE_PREFIX%faq_settings` WHERE `key_name` = 'OSFDB_FANCY_BUTTONS';
 
 
 UPDATE `%TABLE_PREFIX%faq_settings` SET `sort_order` = 43 WHERE `key_name` = 'OSFDB_OPTIONAL_FOOTER';
@@ -14,6 +18,10 @@ UPDATE `%TABLE_PREFIX%faq_settings` SET `sort_order` = 49 WHERE `key_name` = 'OS
 UPDATE `%TABLE_PREFIX%faq_settings` SET `sort_order` = 46 WHERE `key_name` = 'OSF_FAQ_SUBMIT_PAGE';
 UPDATE `%TABLE_PREFIX%faq_settings` SET `sort_order` = 47 WHERE `key_name` = 'OSFDB_USER_SUBMITS_ALLOW';
 UPDATE `%TABLE_PREFIX%faq_settings` SET `sort_order` = 48 WHERE `key_name` = 'OSFDB_USER_ANON';
+
+INSERT INTO `%TABLE_PREFIX%faq_settings` (`key_name`, `key_value`, `field_type`, `sort_order`, `date_added`, `last_modified`) VALUES
+('OSFDB_TIMEZONE', 'Australia/Brisbane', 'timezone', 3, now(), '0000-00-00 00:00:00'),
+('OSFDB_DISABLE_CLIENT', 'false', 'truefalse', 8, now(), '0000-00-00 00:00:00');
 
 INSERT INTO `%TABLE_PREFIX%faq_settings` (`key_name`, `key_value`, `field_type`, `sort_order`, `date_added`, `last_modified`) VALUES
 ('OSFDB_UPLOAD_EXTENSIONS', 'pdf, ods, odt, txt, doc, docx, xls, xlsx, tab, csv, xml', 'textfield', 30, now(), '0000-00-00 00:00:00'), 
@@ -39,6 +47,17 @@ INSERT INTO `%TABLE_PREFIX%faq_settings` (`key_name`, `key_value`, `field_type`,
 ('OSFDB_STATUS_DEFAULT', 'false', 'truefalse', 23, now(), '0000-00-00 00:00:00'),
 ('OSFDB_FEATURE_DEFAULT', 'false', 'truefalse', 24, now(), '0000-00-00 00:00:00');
 
+DROP TABLE IF EXISTS `%TABLE_PREFIX%faq_settings_lang`;
+CREATE TABLE IF NOT EXISTS `%TABLE_PREFIX%faq_settings_lang` (
+  `settings_key` varchar(35) NOT NULL,
+  `language` varchar(32) NOT NULL DEFAULT 'english',
+  `title` varchar(128) NOT NULL,
+  `description` longtext DEFAULT NULL,
+  `last_modified` datetime NOT NULL,
+  PRIMARY KEY (`settings_key`,`language`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
 RENAME TABLE %TABLE_PREFIX%faqcategories         TO %TABLE_PREFIX%osfaq_categories,
              %TABLE_PREFIX%faqs                  TO %TABLE_PREFIX%osfaq,
              %TABLE_PREFIX%faqs_to_faqcategories TO %TABLE_PREFIX%osfaq_to_categories,
@@ -52,6 +71,8 @@ ALTER TABLE `%TABLE_PREFIX%osfaq_categories` CHANGE `show_on_nonfaq` `featured` 
 
 ALTER TABLE `%TABLE_PREFIX%osfaq` ADD `client_entry` SMALLINT( 1 ) NOT NULL DEFAULT '0' AFTER `client_views`;
 ALTER TABLE `%TABLE_PREFIX%osfaq_categories` ADD `client_entry` SMALLINT( 1 ) NOT NULL DEFAULT '0' AFTER `client_views`;
+
+ALTER TABLE `%TABLE_PREFIX%osfaq` ADD `canned` SMALLINT(1) NOT NULL DEFAULT '0' AFTER `featured`;
 
 
 ALTER TABLE `%TABLE_PREFIX%osfaq` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;

@@ -7,7 +7,7 @@
 
 
   Tim Gall
-  Copyright (c) 2009-2013 osfaq.oz-devworx.com.au - All Rights Reserved.
+  Copyright (c) 2009-2018 osfaq.oz-devworx.com.au - All Rights Reserved.
   http://osfaq.oz-devworx.com.au
 
   This file is part of osFaq.
@@ -25,8 +25,7 @@ class FaqAdmin {
    * @return
    */
   function __construct() {
-//    if (!defined('OSF_TEXT_TOP'))
-//      define('OSF_TEXT_TOP', 'TOP');
+
   }
 
   function show_bc_menu(){
@@ -339,6 +338,32 @@ class FaqAdmin {
       return - 1;
     }
   }
+
+  /**
+   * Change the canned-response flag for a FAQ.
+   *
+   * @param int $faq_id
+   * @param int $status
+   * @return mixed - number of effected rows or false
+   */
+  function set_canned($faq_id, $status) {
+  	global $osfAdapter;
+
+    if ($status == '1') {
+      //perform additional work first
+      $osfAdapter->set_canned_response($faq_id, $status);
+
+      return db_query("update ".TABLE_FAQS." set canned = '1' where id = '" . (int)$faq_id . "'");
+    } elseif ($status == '0') {
+      //perform additional work first
+      $osfAdapter->set_canned_response($faq_id, $status);
+
+      return db_query("update ".TABLE_FAQS." set canned = '0' where id = '" . (int)$faq_id . "'");
+    } else {
+      return - 1;
+    }
+  }
+
 
   /**
    * Change the favorite flag for a category.

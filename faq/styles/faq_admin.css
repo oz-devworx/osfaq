@@ -23,7 +23,7 @@ td p{font-size: 1em;}
 /* admin side box */
 div.faqinfo{background-color:#eee; padding:5px; border:1px solid #999; border-radius: .3em; -khtml-border-radius: .3em; -moz-border-radius: .3em; -webkit-border-radius: .3em;}
 table.faqinfo{padding:0;border:none;}
-table.faqinfo th {font-size:1.1em; font-weight:bold; text-align:left;}
+table.faqinfo th {font-size:1.1em; font-weight:bold; text-align:left; overflow-wrap: break-word; word-wrap: break-word; -ms-hyphens: auto; -moz-hyphens: auto; -webkit-hyphens: auto; hyphens: auto;}
 table.faqinfo th a, table.faqinfo th a:hover {color:#FFF; text-decoration:underline;}
 table.faqinfo th b {color: #333;}
 

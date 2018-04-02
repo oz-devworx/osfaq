@@ -93,7 +93,7 @@ class FaqForm {
   }
 
   /**
-   * Output a form opening tag
+   * Return a form opening tag
    *
    * @param mixed $name
    * @param mixed $action

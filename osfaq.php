@@ -6,7 +6,7 @@
 
 
   Tim Gall
-  Copyright (c) 2009-2013 osfaq.oz-devworx.com.au - All Rights Reserved.
+  Copyright (c) 2009-2018 osfaq.oz-devworx.com.au - All Rights Reserved.
   http://osfaq.oz-devworx.com.au
 
   This file is part of osFaq.
@@ -267,8 +267,7 @@ if(OSFDB_USER_SUBMITS_ALLOW=='true'){
 <?php
 /// Search form
 echo $faqForm->form_open('faq_search', FILE_FAQ, '', 'get');
-//echo $faqForm->hidden_field('print', 'true');// displays fulltext of all faqs
-echo $faqForm->input_field('faqsearch', (isset($_GET['faqsearch']) ? trim($_GET['faqsearch']) : OSF_SEARCH_FIELD), 'style="width:170px;" onfocus="if(this.value==\'' . OSF_SEARCH_FIELD . '\'){this.value=\'\';}" onblur="if(this.value==\'\'){this.value=\'' . OSF_SEARCH_FIELD . '\';}"') . '<br />';
+echo $faqForm->input_field('faqsearch', (isset($_GET['faqsearch']) ? trim($_GET['faqsearch']) : ''), 'style="width:200px;" placeholder="' . OSF_SEARCH_FIELD . '"') . '<br />';
 echo $faqForm->submit_css(OSF_SEARCH_BTN) . ' ' . $faqForm->checkbox_field('search_desc', '', true) . ' <small>' . OSF_SEARCH_ANSWER . '</small>';
 echo $faqForm->form_close();
 ?>

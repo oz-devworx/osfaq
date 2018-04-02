@@ -21,13 +21,34 @@ require_once (DIR_FAQ_LANG . OSFDB_DEFAULT_LANG . '/faq_migrate.lang.php');
 
 
 
-$action = (isset($_GET['action']) ? $_GET['action'] : '');
+$action = ( isset($_GET['action']) ? $_GET['action'] : (isset($_POST['action']) ? $_POST['action'] : '') );
 switch ($action) {
+	case 'migrate_from_ost':
+
+		// value comes from checkbox
+		if( isset($_POST['omit_duplicates']) ){
+			$messageHandler->add( OSF_DUPS_IGNORED, FaqMessage::$success );
+		}else{
+			$messageHandler->add( OSF_DUPS_WARN, FaqMessage::$error );
+		}
+
+	break;
+
 	case 'migrate_from_ost_confirm':
 
 		$cats_imported = 0;
 		$faqs_imported = 0;
 		$faqs_ignored = 0;
+
+		// values come from hidden_field
+		$omit_duplicates = ( ( $_POST['omit_duplicates'] == true ) ? true : false );
+		$add_to_can = ( ( $_POST['add_to_can'] == true ) ? true : false );//also add faqs to canned responses
+		$qty_limit = db_input($_POST['qty_limit'], false);
+
+		if($add_to_can){
+			require_once (DIR_FAQ_INCLUDES . 'FaqAdmin.php');
+			$faqAdmin = new FaqAdmin;
+		}
 
 
 		// get osTicket faqs for importing to osFAQ
@@ -54,17 +75,19 @@ from " . TABLE_PREFIX . "faq ostf left join " . TABLE_PREFIX . "faq_category ost
 		$osTicket_query = db_query($osTicket_faq_sql);
 		while ( $osTicket_data = db_fetch_array($osTicket_query) ){
 
-			//dont insert duplicate faqs
-			//XXX: Only check question text for now, since inline images in the answer are modified during the import to avoid breakages.
-			$dup_faq_check = db_query("select id from " . TABLE_FAQS . " where question = '" . db_input($osTicket_data['question'], false) . "'");
-			if( db_num_rows($dup_faq_check) > 0 ){
+			//duplicate faq handler
+			if($omit_duplicates){
+				//XXX: Only check question text for now, since inline images in the answer are modified during the import to avoid breakages.
+				$dup_faq_check = db_query("select id from " . TABLE_FAQS . " where question = '" . db_input($osTicket_data['question'], false) . "'");
+				if( db_num_rows($dup_faq_check) > 0 ){
 
-				//notify admin of duplicate and skip this entry
-				$messageHandler->add( sprintf( OSF_MIGRATE_FAQ_EXISTS, '<a href="faq.php?id=' . $osTicket_data['faq_id'] . '" target="_blank">' . $osTicket_data['faq_id'] . '</a>' ), FaqMessage::$plain );
+					//notify admin of duplicate and skip this entry
+					$messageHandler->add( sprintf( OSF_MIGRATE_FAQ_EXISTS, '<a href="faq.php?id=' . $osTicket_data['faq_id'] . '" target="_blank">' . $osTicket_data['faq_id'] . '</a>' ), FaqMessage::$plain );
 
-				$faqs_ignored++;
+					$faqs_ignored++;
 
-				continue;
+					continue;
+				}
 			}
 
 
@@ -108,6 +131,8 @@ from " . TABLE_PREFIX . "faq ostf left join " . TABLE_PREFIX . "faq_category ost
 					'date_added' => $osTicket_data['faq_created'],
 					'last_modified' => $osTicket_data['faq_updated']
 			);
+
+
 			$sqle->db_compile(TABLE_FAQS, $new_faq_array, FaqSQLExt::$INSERT);
 			$new_faq_id = db_insert_id();
 			$faqs_imported++;
@@ -120,6 +145,17 @@ from " . TABLE_PREFIX . "faq ostf left join " . TABLE_PREFIX . "faq_category ost
 			);
 			$sqle->db_compile(TABLE_FAQS2FAQCATS, $new_faq2cat_array, FaqSQLExt::$INSERT);
 
+			//also set as canned response
+			if($add_to_can){
+				$faqAdmin->set_canned($new_faq_id, 1);
+			}
+
+			//check import limit
+			if( $qty_limit != 'none' ){
+				if( $faqs_imported >= $qty_limit ){
+					break;
+				}
+			}
 		}
 
 
@@ -146,29 +182,85 @@ if ($messageHandler->size() > 0) echo $messageHandler->output() . '<br />';
 $params = FaqFuncs::get_all_get_params(array('action'));
 
 
+//////////////////////////
+// Import from osTicket //
+//////////////////////////
 if ($action == 'migrate_from_ost') {
 ?>
 <h1><?php echo OSF_OST2OSF_HEADING; ?></h1>
 <p><?php echo OSF_OST2OSF_DESCRIPTION; ?></p>
-<a href="<?php echo FaqFuncs::format_url(FILE_FAQ_ADMIN, $params . '&action=migrate_from_ost_confirm'); ?>"><?php echo $faqForm->button_css(OSF_OST2OSF_CONFIRM, OSF_ICON_COPY); ?></a>
+
+
+<?php echo $faqForm->form_open('faq_migrate', FILE_FAQ_ADMIN, 'migrate=true&action=migrate_from_ost_confirm'); ?>
+
+<?php echo $faqForm->hidden_field('omit_duplicates', ( isset($_POST['omit_duplicates']) ? true : false ) ); ?>
+<?php echo $faqForm->hidden_field('add_to_can', ( isset($_POST['add_to_can']) ? true : false ) ); ?>
+<?php echo $faqForm->hidden_field('qty_limit', $_POST['qty_limit'] ); ?>
+
+
+<?php echo $faqForm->submit_css(OSF_IMPORT_NOW, OSF_ICON_COPY); ?> <a href="<?php echo FaqFuncs::format_url(FILE_FAQ_ADMIN, $params); ?>"><?php echo $faqForm->button_css('Cancel', OSF_ICON_CANCEL); ?></a>
+
+<?php echo $faqForm->form_close(); ?>
+
 <?php
 
 
+
+///////////////////////
+// Export from osFAQ //
+///////////////////////
+//TODO: write this part in a future release
 }else if ($action == 'migrate_to_ost') {
 ?>
 <h1><?php echo OSF_OSF2OST_HEADING; ?></h1>
 <p><?php echo OSF_OSF2OST_DESCRIPTION; ?></p>
-<a href="<?php echo FaqFuncs::format_url(FILE_FAQ_ADMIN, $params . '&action=migrate_to_ost_confirm'); ?>"><?php echo $faqForm->button_css(OSF_OSF2OST_CONFIRM, OSF_ICON_COPY); ?></a>
+<a href="<?php echo FaqFuncs::format_url(FILE_FAQ_ADMIN, $params . '&action=migrate_to_ost_confirm'); ?>"><?php echo $faqForm->button_css(OSF_IMPORT_NOW, OSF_ICON_COPY); ?></a>
 <?php
 
 
+
+////////////////////////////////
+// DEFAULT migrate start page //
+////////////////////////////////
 }else{
+
+	$import_type = array();
+	$import_type[] = array('id' => 'migrate_from_ost', 'text' => OSF_OST2OSF);
+// 	$import_type[] = array('id' => 'migrate_to_ost', 'text' => OSF_OSF2OST);
+
+	$q_limits = array();
+	$q_limits[] = array('id' => '10', 'text' => '10');
+	$q_limits[] = array('id' => '50', 'text' => '50');
+	$q_limits[] = array('id' => '100', 'text' => '100');
+	$q_limits[] = array('id' => '250', 'text' => '250');
+	$q_limits[] = array('id' => '500', 'text' => '500');
+	$q_limits[] = array('id' => '1500', 'text' => '1,500');
+	$q_limits[] = array('id' => '5000', 'text' => '5,000');
+	$q_limits[] = array('id' => '10000', 'text' => '10,000');
+	$q_limits[] = array('id' => 'none', 'text' => 'No Limit');
+
+	$qty_limit = ( isset($_POST['qty_limit']) ? $_POST['qty_limit'] : 'none' );
+
 ?>
 <h1><?php echo OSF_MIGRATE_HEADING; ?></h1>
 <p><?php echo OSF_MIGRATE_DESCRIPTION; ?></p>
-<a href="<?php echo FaqFuncs::format_url(FILE_FAQ_ADMIN, $params . '&action=migrate_from_ost'); ?>"><?php echo $faqForm->button_css(OSF_OST2OSF, OSF_ICON_COPY); ?></a>
 
-<!-- <a href="<?php echo FaqFuncs::format_url(FILE_FAQ_ADMIN, $params . '&action=migrate_to_ost'); ?>"><?php echo $faqForm->button_css(OSF_OSF2OST, OSF_ICON_COPY); ?></a> -->
+
+<?php echo $faqForm->form_open('faq_migrate', FILE_FAQ_ADMIN, 'migrate=true'); ?>
+
+<hr>
+<h2><?php echo OSF_OPTIONS; ?></h2>
+
+<?php echo $faqForm->pulldown_menu('action', $import_type); ?>
+<br><br>
+
+<label for="omit_duplicates"><?php echo $faqForm->checkbox_field('omit_duplicates', '1', true) . ' ' . OSF_OMIT_DUPS; ?></label><br><br>
+<label for="add_to_can"><?php echo $faqForm->checkbox_field('add_to_can', '1', false) . ' ' . OSF_CAN_FAQS; ?></label><br><br>
+<label for="qty_limit"><?php echo OSF_LIMIT_TO . ' ' . $faqForm->pulldown_menu('qty_limit', $q_limits, $qty_limit); ?></label><br><br>
+
+
+<?php echo $faqForm->submit_css(OSF_COPY_FAQ, OSF_ICON_COPY); ?>
+<?php echo $faqForm->form_close(); ?>
 
 <?php
 }

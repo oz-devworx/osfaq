@@ -20,6 +20,7 @@ CREATE TABLE IF NOT EXISTS `%TABLE_PREFIX%osfaq` (
   `answer` longtext,
   `faq_active` smallint(1) NOT NULL DEFAULT '0',
   `featured` smallint(1) NOT NULL DEFAULT '0',
+  `canned` smallint(1) NOT NULL DEFAULT '0',
   `pdfupload` varchar(64) DEFAULT NULL,
   `upload_text` varchar(255) DEFAULT NULL,
   `name` varchar(64) NOT NULL DEFAULT '',
@@ -52,7 +53,7 @@ CREATE TABLE IF NOT EXISTS `%TABLE_PREFIX%osfaq_admin` (
 
 
 INSERT INTO `%TABLE_PREFIX%osfaq_admin` (`key_name`, `key_value`) VALUES
-('DB_FAQ_VERSION', '1.3.1 ST'),
+('DB_FAQ_VERSION', '1.4.0 ST'),
 ('OSFA_SM_TYPE', 'test'),
 ('OSFA_SM_PATH', '/'),
 ('OSFA_SM_IDX', ''),

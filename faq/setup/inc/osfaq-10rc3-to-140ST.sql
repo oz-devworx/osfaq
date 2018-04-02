@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS `%TABLE_PREFIX%faq_admin` (
 
 
 INSERT INTO `%TABLE_PREFIX%faq_admin` (`key_name`, `key_value`) VALUES
-('DB_FAQ_VERSION', '1.3.1 ST'),
+('DB_FAQ_VERSION', '1.4.0 ST'),
 ('OSFA_SM_TYPE', 'test'),
 ('OSFA_SM_PATH', '/'),
 ('OSFA_SM_IDX', ''),
@@ -124,6 +124,8 @@ ALTER TABLE `%TABLE_PREFIX%osfaq_categories` CHANGE `show_on_nonfaq` `featured` 
 
 ALTER TABLE `%TABLE_PREFIX%osfaq` ADD `client_entry` SMALLINT( 1 ) NOT NULL DEFAULT '0' AFTER `client_views`;
 ALTER TABLE `%TABLE_PREFIX%osfaq_categories` ADD `client_entry` SMALLINT( 1 ) NOT NULL DEFAULT '0' AFTER `client_views`;
+
+ALTER TABLE `%TABLE_PREFIX%osfaq` ADD `canned` SMALLINT(1) NOT NULL DEFAULT '0' AFTER `featured`;
 
 
 ALTER TABLE `%TABLE_PREFIX%osfaq` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;

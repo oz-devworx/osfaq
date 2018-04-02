@@ -6,7 +6,7 @@
 
 
   Tim Gall
-  Copyright (c) 2009-2013 osfaq.oz-devworx.com.au - All Rights Reserved.
+  Copyright (c) 2009-2018 osfaq.oz-devworx.com.au - All Rights Reserved.
   http://osfaq.oz-devworx.com.au
 
   This file is part of osFaq.
@@ -20,7 +20,7 @@ define('OSF_TITLE', 'Frequently Asked Questions');
 define('OSF_LINK', 'FAQs');
 define('OSF_SEARCH_LINK', 'Search for: ');
 define('OSF_SEARCH_FIELD', 'search the FAQs');
-define('OSF_SEARCH_ANSWER', 'Also search answer text');
+define('OSF_SEARCH_ANSWER', 'Search answer');
 define('OSF_SEARCH_BTN', 'Search FAQs');
 
 define('OSF_Q', 'Q');
@@ -37,7 +37,7 @@ define('OSF_TOP_LEVEL', 'FAQ Home');
 define('OSF_TEXT_TOP', 'FAQ Home');
 define('OSF_SUGGEST_NEW', 'Suggest a FAQ');
 
-define('OSF_REVEAL_HIDE', 'Click the question to reveal the answer, click the question once more to hide.');
+define('OSF_REVEAL_HIDE', 'Click the question to reveal the answer.');
 define('OSF_SELECT_CAT', 'Select a category to view the associated FAQs.');
 
 define('OSF_TOP', 'TOP');

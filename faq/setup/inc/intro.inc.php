@@ -24,7 +24,7 @@
  * Locate and identify existing installations based on the database structure
  * (and for newer versions the osFaq database version number)
  *
- * @return the existing osFaq versions installer value
+ * @return int - the existing osFaq versions installer value
  * or 0 if not installed
  * and -1 for downgrades
  */
@@ -38,7 +38,11 @@ function find_old_versions() {
 
 		$result = db_query("SELECT key_value FROM " . TABLE_FAQ_ADMIN . " WHERE key_name LIKE 'DB_FAQ_VERSION';");
 		if ($temp_data = db_fetch_array($result)) {
-			if($temp_data['key_value']=='1.3.1 ST'){
+			if($temp_data['key_value']=='1.4.0 ST'){
+				// version 1.4.0 ST
+				$old_version = 15;
+
+			}elseif($temp_data['key_value']=='1.3.1 ST'){
 				// version 1.3.1 ST
 				$old_version = 14;
 
@@ -441,7 +445,19 @@ switch($oldver){
 <?php
   break;
 
-  case 14:
+case 14:
+	// enable 1.3.1st to current upgrade
+	?>
+<h3><?php echo sprintf(OSFI_INTRO_V_DETECTED, 'osFaq v1.3.1 ST'); ?></h3>
+<form action="upgrade.php" method="get" enctype="text/plain">
+  <input type="hidden" name="faq_step" value="1" />
+  <input type="hidden" name="upgrade_rc" value="14" />
+  <input type="submit" value="<?php echo sprintf(OSFI_INTRO_UPG_TO, '1.3.1.st', FAQ_VERSION); ?>" />
+</form>
+<?php
+  break;
+
+  case 15:
 ?>
 <div class="messageHandlerError"><img src="images/error.gif" alt="<?php echo OSFI_WARNING; ?>" />
 <?php
@@ -502,17 +518,19 @@ switch(OSTICKET_CHECK_VER){
     <td class="row"><strong><?php echo OSFI_DB_PREFIX; ?></strong></td>
     <td class="row"><?php echo TABLE_PREFIX; ?></td>
   </tr>
+<!--
   <tr>
     <td class="rowalt"><strong><?php echo OSFI_DB_PERMISSIONS; ?></strong></td>
     <td class="rowalt"><?php echo ( (strlen($install_perms_string)==0) ? '<img src="images/success.gif" title="' . OSFI_OK . '" alt="' . OSFI_OK . '" />' : '<img src="images/error.gif" title="' . OSFI_MISSING_PERMS . '" alt="' . OSFI_ERROR . '" /><br />' . $install_perms_string ); ?></td>
   </tr>
+ -->
   <tr>
-    <td class="row"><strong><?php echo OSFI_DOMAIN; ?></strong></td>
-    <td class="row"><?php echo SERVER_DOMAIN; ?></td>
+    <td class="rowalt"><strong><?php echo OSFI_DOMAIN; ?></strong></td>
+    <td class="rowalt"><?php echo SERVER_DOMAIN; ?></td>
   </tr>
   <tr>
-    <td class="rowalt"><a href="index.php?savepath=false"><img src="images/application_edit.png" alt="<?php echo OSFI_EDIT_DOC_ROOT; ?>" title="<?php echo OSFI_EDIT_DOC_ROOT; ?>" /></a> <strong><?php echo OSFI_DOC_ROOT; ?></strong></td>
-    <td class="rowalt">
+    <td class="row"><a href="index.php?savepath=false"><img src="images/application_edit.png" alt="<?php echo OSFI_EDIT_DOC_ROOT; ?>" title="<?php echo OSFI_EDIT_DOC_ROOT; ?>" /></a> <strong><?php echo OSFI_DOC_ROOT; ?></strong></td>
+    <td class="row">
 <?php
   if(false===realpath(OSF_DOC_ROOT)){
     echo OSFI_ROOT_PATH_NF;
@@ -523,8 +541,8 @@ switch(OSTICKET_CHECK_VER){
 ?></td>
   </tr>
   <tr>
-    <td class="row"><a href="index.php?savepath=false"><img src="images/application_edit.png" alt="<?php echo OSFI_EDIT_WEB_ROOT; ?>" title="<?php echo OSFI_EDIT_WEB_ROOT; ?>" /></a> <strong><?php echo OSFI_WEB_ROOT; ?></strong></td>
-    <td class="row"><?php echo '<img src="' . DIR_FS_WEB_ROOT . 'faq/setup/images/webroot_found_small.png" alt="'.OSFI_IMAGE.'" /> [ ' . DIR_FS_WEB_ROOT . ' ]'; ?></td>
+    <td class="rowalt"><a href="index.php?savepath=false"><img src="images/application_edit.png" alt="<?php echo OSFI_EDIT_WEB_ROOT; ?>" title="<?php echo OSFI_EDIT_WEB_ROOT; ?>" /></a> <strong><?php echo OSFI_WEB_ROOT; ?></strong></td>
+    <td class="rowalt"><?php echo '<img src="' . DIR_FS_WEB_ROOT . 'faq/setup/images/webroot_found_small.png" alt="'.OSFI_IMAGE.'" /> [ ' . DIR_FS_WEB_ROOT . ' ]'; ?></td>
   </tr>
 </table>
 

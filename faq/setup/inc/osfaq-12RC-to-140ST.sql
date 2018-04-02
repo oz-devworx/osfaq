@@ -1,10 +1,12 @@
-UPDATE `%TABLE_PREFIX%osfaq_admin` SET `key_value` = '1.3.1 ST' WHERE `key_name` = 'DB_FAQ_VERSION';
+UPDATE `%TABLE_PREFIX%osfaq_admin` SET `key_value` = '1.4.0 ST' WHERE `key_name` = 'DB_FAQ_VERSION';
 
 ALTER TABLE `%TABLE_PREFIX%osfaq` CHANGE `show_on_nonfaq` `featured` SMALLINT( 1 ) NOT NULL DEFAULT '0';
 ALTER TABLE `%TABLE_PREFIX%osfaq_categories` CHANGE `show_on_nonfaq` `featured` SMALLINT( 1 ) NOT NULL DEFAULT '0';
 
 ALTER TABLE `%TABLE_PREFIX%osfaq` ADD `client_entry` SMALLINT( 1 ) NOT NULL DEFAULT '0' AFTER `client_views`;
 ALTER TABLE `%TABLE_PREFIX%osfaq_categories` ADD `client_entry` SMALLINT( 1 ) NOT NULL DEFAULT '0' AFTER `client_views`;
+
+ALTER TABLE `%TABLE_PREFIX%osfaq` ADD `canned` SMALLINT(1) NOT NULL DEFAULT '0' AFTER `featured`;
 
 INSERT INTO `%TABLE_PREFIX%osfaq_settings` (`key_name`, `key_value`, `field_type`, `sort_order`, `date_added`, `last_modified`) VALUES
 ('OSFDB_STATUS_DEFAULT', 'false', 'truefalse', 23, now(), '0000-00-00 00:00:00'),
