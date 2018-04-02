@@ -254,10 +254,10 @@ if ($action == 'migrate_from_ost') {
 <?php echo $faqForm->pulldown_menu('action', $import_type); ?>
 <br><br>
 
-<label for="omit_duplicates"><?php echo $faqForm->checkbox_field('omit_duplicates', '1', true) . ' ' . OSF_OMIT_DUPS; ?></label><br>
-<label for="add_to_can"><?php echo $faqForm->checkbox_field('add_to_can', '1', false) . ' ' . OSF_CAN_FAQS; ?></label><br>
-<label for="qty_limit"><?php echo OSF_LIMIT_TO . ' ' . $faqForm->pulldown_menu('qty_limit', $q_limits, $qty_limit); ?></label><br>
-<br>
+<label for="omit_duplicates"><?php echo $faqForm->checkbox_field('omit_duplicates', '1', true) . ' ' . OSF_OMIT_DUPS; ?></label><br><br>
+<label for="add_to_can"><?php echo $faqForm->checkbox_field('add_to_can', '1', false) . ' ' . OSF_CAN_FAQS; ?></label><br><br>
+<label for="qty_limit"><?php echo OSF_LIMIT_TO . ' ' . $faqForm->pulldown_menu('qty_limit', $q_limits, $qty_limit); ?></label><br><br>
+
 
 <?php echo $faqForm->submit_css(OSF_COPY_FAQ, OSF_ICON_COPY); ?>
 <?php echo $faqForm->form_close(); ?>

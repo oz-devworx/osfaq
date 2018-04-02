@@ -20,7 +20,7 @@ define('OSF_MIGRATE_CATS_IMPORTED', 'FAQ Categories imported %s');
 define('OSF_MIGRATE_FAQS_IMPORTED', 'FAQs imported %s');
 define('OSF_MIGRATE_FAQS_IGNORED', 'Duplicate FAQs ignored %s');
 
-define('OSF_MIGRATE_HEADING', 'Migration Options');
+define('OSF_MIGRATE_HEADING', 'Import/Export');
 define('OSF_OST2OSF_HEADING', 'Ready to Copy FAQs from osTicket');
 define('OSF_OSF2OST_HEADING', 'Ready to Copy FAQs from osFAQ');
 
