@@ -5,9 +5,7 @@
   Client side external FAQ search form.
 
   FAQ search form.
-  This form can be used in osTicket pages and will display FAQs & FaqCats
-  that are returned from searching.
-  Results are displayed on the same page the form is embedded.
+  This form can be used in external locations such as osTicket pages.
 
   TO USE:
   <?php require(ROOT_DIR.'faq/include/client/faq_search.php'); ?>
