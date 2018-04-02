@@ -37,6 +37,15 @@ define('OSF_COPY_FAQ', 'Import FAQs');
 
 define('OSF_MIGRATE_DESCRIPTION', 'Copy FAQs and Categories from one FAQ manager system to another.');
 
+define('OSF_DUPS_IGNORED', 'Duplicates will be ignored');
+define('OSF_DUPS_WARN', 'WARNING: Everything will be imported. This may create duplicates! Especially if you have imported the KB before');
+
+define('OSF_OPTIONS', 'Options');
+
+define('OSF_OMIT_DUPS', 'Omit Duplicates from importing? (highly recommended)');
+define('OSF_CAN_FAQS', 'Add ALL newly imported FAQs to canned responses?');
+define('OSF_LIMIT_TO', 'Limit to');
+
 // temp message
-define('OSF_MIGRATE_NOT_IMPLEMENTED_YET', 'This functionality will be implemented in the next release of osFAQ.');
+define('OSF_MIGRATE_NOT_IMPLEMENTED_YET', 'This functionality will be implemented in a future release of osFAQ.');
 ?>

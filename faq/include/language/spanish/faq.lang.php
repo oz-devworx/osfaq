@@ -35,7 +35,7 @@ define('OSF_TOP_LEVEL', 'NIVEL SUPERIOR');
 define('OSF_TEXT_TOP', 'NIVEL SUPERIOR');
 define('OSF_SUGGEST_NEW', 'Sugiere una Pregunta Frecuente');
 
-define('OSF_REVEAL_HIDE', 'Haga clic en la pregunta para ver u ocultar la respuesta.');
+define('OSF_REVEAL_HIDE', 'Haga clic en la pregunta para ver la respuesta.');
 define('OSF_SELECT_CAT', 'Seleccione una categoría para ver las preguntas más frecuentes asociadas.');
 
 define('OSF_TOP', 'Arriba');

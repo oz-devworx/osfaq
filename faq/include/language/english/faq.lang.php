@@ -37,7 +37,7 @@ define('OSF_TOP_LEVEL', 'FAQ Home');
 define('OSF_TEXT_TOP', 'FAQ Home');
 define('OSF_SUGGEST_NEW', 'Suggest a FAQ');
 
-define('OSF_REVEAL_HIDE', 'Click the question to reveal the answer, click the question once more to hide.');
+define('OSF_REVEAL_HIDE', 'Click the question to reveal the answer.');
 define('OSF_SELECT_CAT', 'Select a category to view the associated FAQs.');
 
 define('OSF_TOP', 'TOP');

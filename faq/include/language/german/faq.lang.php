@@ -35,7 +35,7 @@ define('OSF_TOP_LEVEL', 'Hauptkategorie');
 define('OSF_TEXT_TOP', 'Hauptkategorie');
 define('OSF_SUGGEST_NEW', 'FAQ-Eintrag vorschlagen');
 
-define('OSF_REVEAL_HIDE', 'Klicken Sie auf die Frage, um die Antwort zu sehen. Klicken Sie erneut, um sie zu verbergen.');
+define('OSF_REVEAL_HIDE', 'Klicken Sie auf die Frage, um die Antwort zu sehen.');
 define('OSF_SELECT_CAT', 'Wählen Sie eine Kategorie, um die zugehörigen FAQ-Einträge zu sehen.');
 
 define('OSF_TOP', 'Zum Seitenanfang');
