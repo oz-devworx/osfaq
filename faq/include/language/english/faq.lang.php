@@ -6,7 +6,7 @@
 
 
   Tim Gall
-  Copyright (c) 2009-2013 osfaq.oz-devworx.com.au - All Rights Reserved.
+  Copyright (c) 2009-2018 osfaq.oz-devworx.com.au - All Rights Reserved.
   http://osfaq.oz-devworx.com.au
 
   This file is part of osFaq.
@@ -20,7 +20,7 @@ define('OSF_TITLE', 'Frequently Asked Questions');
 define('OSF_LINK', 'FAQs');
 define('OSF_SEARCH_LINK', 'Search for: ');
 define('OSF_SEARCH_FIELD', 'search the FAQs');
-define('OSF_SEARCH_ANSWER', 'Also search answer text');
+define('OSF_SEARCH_ANSWER', 'Search answer');
 define('OSF_SEARCH_BTN', 'Search FAQs');
 
 define('OSF_Q', 'Q');
