@@ -16,10 +16,11 @@
 
 ************************************************************************* */
 
+define('DIR_PATH_ADMIN', 'scp/');// your admin folder (with trailing /)
+
 define('FAQ_VERSION','1.4.0 ST');//don't change this. Changes from version to version.
 define('FAQ_CK_VERSION', '4_8_0');//ckeditor path constant.
 
-define('DIR_PATH_ADMIN', 'scp/');// your admin folder (with trailing /)
 
 // see: faq/include/OsFaqAdapter.class.php for details
 if($osfAdapter){
