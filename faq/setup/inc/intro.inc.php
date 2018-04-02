@@ -525,12 +525,12 @@ switch(OSTICKET_CHECK_VER){
   </tr>
  -->
   <tr>
-    <td class="row"><strong><?php echo OSFI_DOMAIN; ?></strong></td>
-    <td class="row"><?php echo SERVER_DOMAIN; ?></td>
+    <td class="rowalt"><strong><?php echo OSFI_DOMAIN; ?></strong></td>
+    <td class="rowalt"><?php echo SERVER_DOMAIN; ?></td>
   </tr>
   <tr>
-    <td class="rowalt"><a href="index.php?savepath=false"><img src="images/application_edit.png" alt="<?php echo OSFI_EDIT_DOC_ROOT; ?>" title="<?php echo OSFI_EDIT_DOC_ROOT; ?>" /></a> <strong><?php echo OSFI_DOC_ROOT; ?></strong></td>
-    <td class="rowalt">
+    <td class="row"><a href="index.php?savepath=false"><img src="images/application_edit.png" alt="<?php echo OSFI_EDIT_DOC_ROOT; ?>" title="<?php echo OSFI_EDIT_DOC_ROOT; ?>" /></a> <strong><?php echo OSFI_DOC_ROOT; ?></strong></td>
+    <td class="row">
 <?php
   if(false===realpath(OSF_DOC_ROOT)){
     echo OSFI_ROOT_PATH_NF;
@@ -541,8 +541,8 @@ switch(OSTICKET_CHECK_VER){
 ?></td>
   </tr>
   <tr>
-    <td class="row"><a href="index.php?savepath=false"><img src="images/application_edit.png" alt="<?php echo OSFI_EDIT_WEB_ROOT; ?>" title="<?php echo OSFI_EDIT_WEB_ROOT; ?>" /></a> <strong><?php echo OSFI_WEB_ROOT; ?></strong></td>
-    <td class="row"><?php echo '<img src="' . DIR_FS_WEB_ROOT . 'faq/setup/images/webroot_found_small.png" alt="'.OSFI_IMAGE.'" /> [ ' . DIR_FS_WEB_ROOT . ' ]'; ?></td>
+    <td class="rowalt"><a href="index.php?savepath=false"><img src="images/application_edit.png" alt="<?php echo OSFI_EDIT_WEB_ROOT; ?>" title="<?php echo OSFI_EDIT_WEB_ROOT; ?>" /></a> <strong><?php echo OSFI_WEB_ROOT; ?></strong></td>
+    <td class="rowalt"><?php echo '<img src="' . DIR_FS_WEB_ROOT . 'faq/setup/images/webroot_found_small.png" alt="'.OSFI_IMAGE.'" /> [ ' . DIR_FS_WEB_ROOT . ' ]'; ?></td>
   </tr>
 </table>
 
