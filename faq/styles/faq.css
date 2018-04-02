@@ -10,7 +10,7 @@
 #faqs .question{color:#FFFFFF; font-weight:bold; margin:0; padding:3px; font-size:10pt; background-color:#999999; border-top:1px solid #666666; border-right:1px solid #666666}
 #faqs .question a:link{color:#FFFFFF; margin:0; padding:3px; font-size:10pt; text-decoration:none}
 #faqs .question a:visited{color:#FFFFFF; text-decoration:none}
-#faqs .question a:hover, .question a:active{color:#FFEECC; text-decoration:none}
+#faqs .question a:hover, .question a:active{color:#FFEECC; text-decoration:none; border:none}
 
 #faqs p.question{padding:0}
 #faqs .answer{font-weight:normal; background:#EEEEEE; margin:0; padding:0; font-size:10pt; border:1px solid #333333}
