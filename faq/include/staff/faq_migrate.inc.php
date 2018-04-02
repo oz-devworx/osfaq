@@ -27,9 +27,9 @@ switch ($action) {
 
 		// value comes from checkbox
 		if( isset($_POST['omit_duplicates']) ){
-			$messageHandler->add( 'Duplicates will be ignored', FaqMessage::$success );
+			$messageHandler->add( OSF_DUPS_IGNORED, FaqMessage::$success );
 		}else{
-			$messageHandler->add( 'WARNING: Everything will be imported. This may create duplicates! Especially if you have imported the KB before', FaqMessage::$error );
+			$messageHandler->add( OSF_DUPS_WARN, FaqMessage::$error );
 		}
 
 	break;
@@ -43,6 +43,7 @@ switch ($action) {
 		// values come from hidden_field
 		$omit_duplicates = ( ( $_POST['omit_duplicates'] == true ) ? true : false );
 		$add_to_can = ( ( $_POST['add_to_can'] == true ) ? true : false );//also add faqs to canned responses
+		$qty_limit = db_input($_POST['qty_limit'], false);
 
 		if($add_to_can){
 			require_once (DIR_FAQ_INCLUDES . 'FaqAdmin.php');
@@ -149,6 +150,12 @@ from " . TABLE_PREFIX . "faq ostf left join " . TABLE_PREFIX . "faq_category ost
 				$faqAdmin->set_canned($new_faq_id, 1);
 			}
 
+			//check import limit
+			if( $qty_limit != 'none' ){
+				if( $faqs_imported >= $qty_limit ){
+					break;
+				}
+			}
 		}
 
 
@@ -188,6 +195,8 @@ if ($action == 'migrate_from_ost') {
 
 <?php echo $faqForm->hidden_field('omit_duplicates', ( isset($_POST['omit_duplicates']) ? true : false ) ); ?>
 <?php echo $faqForm->hidden_field('add_to_can', ( isset($_POST['add_to_can']) ? true : false ) ); ?>
+<?php echo $faqForm->hidden_field('qty_limit', $_POST['qty_limit'] ); ?>
+
 
 <?php echo $faqForm->submit_css(OSF_IMPORT_NOW, OSF_ICON_COPY); ?> <a href="<?php echo FaqFuncs::format_url(FILE_FAQ_ADMIN, $params); ?>"><?php echo $faqForm->button_css('Cancel', OSF_ICON_CANCEL); ?></a>
 
@@ -198,8 +207,9 @@ if ($action == 'migrate_from_ost') {
 
 
 ///////////////////////
-// Import from osFAQ //
+// Export from osFAQ //
 ///////////////////////
+//TODO: write this part in a future release
 }else if ($action == 'migrate_to_ost') {
 ?>
 <h1><?php echo OSF_OSF2OST_HEADING; ?></h1>
@@ -217,6 +227,17 @@ if ($action == 'migrate_from_ost') {
 	$import_type = array();
 	$import_type[] = array('id' => 'migrate_from_ost', 'text' => OSF_OST2OSF);
 // 	$import_type[] = array('id' => 'migrate_to_ost', 'text' => OSF_OSF2OST);
+
+	$q_limits = array();
+	$q_limits[] = array('id' => '50', 'text' => '50');
+	$q_limits[] = array('id' => '100', 'text' => '100');
+	$q_limits[] = array('id' => '250', 'text' => '250');
+	$q_limits[] = array('id' => '500', 'text' => '500');
+	$q_limits[] = array('id' => '1500', 'text' => '1500');
+	$q_limits[] = array('id' => 'none', 'text' => 'No Limit');
+
+	$qty_limit = ( isset($_POST['qty_limit']) ? $_POST['qty_limit'] : 'none' );
+
 ?>
 <h1><?php echo OSF_MIGRATE_HEADING; ?></h1>
 <p><?php echo OSF_MIGRATE_DESCRIPTION; ?></p>
@@ -225,13 +246,14 @@ if ($action == 'migrate_from_ost') {
 <?php echo $faqForm->form_open('faq_migrate', FILE_FAQ_ADMIN, 'migrate=true'); ?>
 
 <hr>
-<h2><?php echo 'Options'; ?></h2>
+<h2><?php echo OSF_OPTIONS; ?></h2>
 
 <?php echo $faqForm->pulldown_menu('action', $import_type); ?>
 <br><br>
 
-<label for="omit_duplicates"><?php echo $faqForm->checkbox_field('omit_duplicates', '1', true); ?> Omit Duplicates from importing? (highly recommended)</label><br>
-<label for="add_to_can"><?php echo $faqForm->checkbox_field('add_to_can', '1', false); ?> Add ALL newly imported FAQs to canned responses?</label><br>
+<label for="omit_duplicates"><?php echo $faqForm->checkbox_field('omit_duplicates', '1', true) . ' ' . OSF_OMIT_DUPS; ?></label><br>
+<label for="add_to_can"><?php echo $faqForm->checkbox_field('add_to_can', '1', false) . ' ' . OSF_CAN_FAQS; ?></label><br>
+<label for="qty_limit"><?php echo OSF_LIMIT_TO . ' ' . $faqForm->pulldown_menu('qty_limit', $q_limits, $qty_limit); ?></label><br>
 <br>
 
 <?php echo $faqForm->submit_css(OSF_COPY_FAQ, OSF_ICON_COPY); ?>
