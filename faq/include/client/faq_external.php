@@ -14,7 +14,7 @@
 
 
   Tim Gall
-  Copyright (c) 2009-2013 osfaq.oz-devworx.com.au - All Rights Reserved.
+  Copyright (c) 2009-2018 osfaq.oz-devworx.com.au - All Rights Reserved.
   http://osfaq.oz-devworx.com.au
 
   This file is part of osFaq.
@@ -25,8 +25,10 @@
 ************************************************************************* */
 
 /// CONFIG
-require ('./faq/include/OsFaqAdapter.class.php');
-$osfAdapter = new OsFaqAdapter(false);
+require_once('./faq/include/OsFaqAdapter.class.php');
+if(!$osfAdapter){
+	$osfAdapter = new OsFaqAdapter(false);
+}
 
 require_once('./faq/include/main.faq.php'); // !important
 require_once(DIR_FAQ_INCLUDES . 'FaqExternal.php');// static
@@ -35,10 +37,10 @@ require_once(DIR_FAQ_INCLUDES . 'FaqExternal.php');// static
 /// only display if this feature is enabled in admin
 if(OSFDB_DISABLE_CLIENT=='false' && OSFDB_EXT_FAQS_ALLOW=='true'){
 
-	echo $osf_langDirection;
+// 	echo $osf_langDirection;
 
 	/// DEFAULT LANGUAGE FILE.
-	require_once (DIR_FAQ_LANG . OSFDB_DEFAULT_LANG . '/faq_external.lang.php');
+	require_once(DIR_FAQ_LANG . OSFDB_DEFAULT_LANG . '/faq_external.lang.php');
 
 	require_once(DIR_FAQ_INCLUDES . 'FaqFuncs.php');
 
