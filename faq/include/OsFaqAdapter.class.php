@@ -7,7 +7,7 @@ This adapter is for pluging into osTicket. Tested with osTicket 1.6 through to 1
 
 
 Tim Gall
-Copyright (c) 2009-2017 osfaq.oz-devworx.com.au - All Rights Reserved.
+Copyright (c) 2009-2018 osfaq.oz-devworx.com.au - All Rights Reserved.
 http://osfaq.oz-devworx.com.au
 
 This file is part of osFaq.
@@ -18,8 +18,7 @@ For licensing, see LICENSE.html or http://osfaq.oz-devworx.com.au/license
 ************************************************************************* */
 
 /**
- * Adapter functions for plugging osFaq into various web engines.<br />
- * Compatible with <b>osTicket 1.6 and 1.7</b>
+ * Adapter functions for plugging osFaq into various web engines.
  */
 class OsFaqAdapter{
 
@@ -28,8 +27,21 @@ class OsFaqAdapter{
 	 * @param boolean $accelerate - pass in false to bypass gzip page compression
 	 */
 	public function __construct($accelerate = true){
+
+		//XXX: adjust mem sizes here [if setable]
+		//See: https://secure.php.net/manual/en/ini.core.php#ini.memory-limit
+		$preferred_limit = '128M';// PHP ini default
+		$current_limit = @ini_get( 'memory_limit' );
+
+		if((int)$current_limit < (int)$preferred_limit){
+			@ini_set( 'memory_limit', $preferred_limit );
+		}
+
+
 		if($accelerate)
 			require ('accelerator.faq.php'); // page accelerator. MUST BE FIRST
+
+		header("X-Accel-Buffering: no");// nginx fastcgi fix?
 	}
 
 
