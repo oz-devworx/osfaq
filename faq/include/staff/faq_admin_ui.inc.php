@@ -476,7 +476,7 @@ if ($action == 'new_category' || $action == 'edit_category') {
     <td>&nbsp;</td>
   </tr>
   <tr>
-    <td><h2><?php echo OSF_A; ?></h2>
+    <td class="answer"><h2><?php echo OSF_A; ?></h2>
     <?php echo $osfAdapter->fetch_inline_images($fInfo->answer); ?></td>
   </tr>
 

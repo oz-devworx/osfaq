@@ -29,6 +29,8 @@ table.faqinfo th b {color: #333;}
 
 table.faqinfo td {padding-left:3px; font-size:0.9em; color:#000000;}
 
+.answer img {max-width: 100%; height: auto;}
+
 .osf_bc{color:#bbb;}
 
 /* system messages */

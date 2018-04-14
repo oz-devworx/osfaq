@@ -17,6 +17,8 @@
 #faqs p.answer{padding:10px}
 #faqs .faq{font-size:12px}
 
+#faqs p img {max-width: 100%; height: auto;}
+
 #faqs .fade{color:#999999;}
 
 /* external faq box to suit a page section */
