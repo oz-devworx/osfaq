@@ -35,7 +35,7 @@ function show_faq_answer($faq_id, $question_str, $answer_str, $document, $docume
 ?>
       <tr>
         <td class="Q" valign="top"><?php echo OSF_Q; ?></td>
-        <td valign="bottom" class="question"><a name="f<?php echo $faq_id; ?>"></a>
+        <td class="question" valign="bottom"><a name="f<?php echo $faq_id; ?>"></a>
           <p>
 <?php
         if((OSFDB_SHOW_SINGLE!='true' || (OSFDB_SHOW_SINGLE=='true' && $answer>0)) || $rf_rows == 1 || $showall){
@@ -52,7 +52,7 @@ function show_faq_answer($faq_id, $question_str, $answer_str, $document, $docume
       </tr>
       <tr>
         <td class="A" valign="top"><?php echo OSF_A; ?></td>
-        <td valign="bottom"><?php echo isset($_GET['search_desc']) ? FaqFuncs::highlight_keywords($answer_str, $search_str) : $answer_str; ?>
+        <td class="answer" valign="bottom"><?php echo isset($_GET['search_desc']) ? FaqFuncs::highlight_keywords($answer_str, $search_str) : $answer_str; ?>
 <?php
         if (!empty($document) && is_file(DIR_FS_DOC . $document)) {
           $upext = substr($document, strrpos($document, '.') +1);
