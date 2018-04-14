@@ -53,11 +53,11 @@ if(OSFDB_DISABLE_CLIENT=='false'){
 <?php
 	/// Search form
 	echo $faqForm->form_open('faq_search', FILE_FAQ, '', 'get');
-	echo $faqForm->input_field('faqsearch', (isset($_GET['faqsearch']) ? trim($_GET['faqsearch']) : ''), 'style="width:95%;" placeholder="' . OSF_SEARCH_FIELD . '"') . '<br />';
+	echo $faqForm->input_field('faqsearch', (isset($_GET['faqsearch']) ? trim($_GET['faqsearch']) : ''), 'style="width:98%;" placeholder="' . OSF_SEARCH_FIELD . '"') . '<br />';
 	echo $faqForm->submit_css(OSF_SEARCH_BTN) . ' ' . $faqForm->checkbox_field('search_desc', '', true) . ' <small>' . OSF_SEARCH_ANSWER . '</small>';
 	echo $faqForm->form_close();
 ?>
 </div>
 <?php
-} //if(OSFDB_DISABLE_CLIENT==='false' && OSFDB_EXT_FAQS_ALLOW=='true'){
+} //if(OSFDB_DISABLE_CLIENT=='false'){
 ?>
