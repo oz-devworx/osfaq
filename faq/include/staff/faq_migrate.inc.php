@@ -77,11 +77,12 @@ from " . TABLE_PREFIX . "faq ostf left join " . TABLE_PREFIX . "faq_category ost
 
 			//duplicate faq handler
 			if($omit_duplicates){
-				//XXX: Only check question text for now, since inline images in the answer are modified during the import to avoid breakages.
+				//XXX: Only check question text for now.
 				$dup_faq_check = db_query("select id from " . TABLE_FAQS . " where question = '" . db_input($osTicket_data['question'], false) . "'");
 				if( db_num_rows($dup_faq_check) > 0 ){
 
 					//notify admin of duplicate and skip this entry
+					//TODO: limit this to sane amounts of feedback data. If theres... say... over 50 or 100 it wont be overly helpfull to the admin... they will be better off viewing the overall stats instead.
 					$messageHandler->add( sprintf( OSF_MIGRATE_FAQ_EXISTS, '<a href="faq.php?id=' . $osTicket_data['faq_id'] . '" target="_blank">' . $osTicket_data['faq_id'] . '</a>' ), FaqMessage::$plain );
 
 					$faqs_ignored++;

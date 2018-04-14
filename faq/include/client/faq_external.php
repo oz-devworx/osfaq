@@ -137,5 +137,5 @@ if(OSFDB_DISABLE_CLIENT=='false' && OSFDB_EXT_FAQS_ALLOW=='true'){
 </div>
 <div class="clear"></div>
 <?php
-} //if(OSFDB_DISABLE_CLIENT==='false' && OSFDB_EXT_FAQS_ALLOW=='true'){
+} //if(OSFDB_DISABLE_CLIENT=='false' && OSFDB_EXT_FAQS_ALLOW=='true'){
 ?>

@@ -7,7 +7,7 @@
 
 
  Tim Gall
- Copyright (c) 2009-2013 osfaq.oz-devworx.com.au - All Rights Reserved.
+ Copyright (c) 2009-2018 osfaq.oz-devworx.com.au - All Rights Reserved.
  http://osfaq.oz-devworx.com.au
 
  This file is part of osFaq.
