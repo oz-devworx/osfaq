@@ -260,12 +260,13 @@ class FaqForm {
   }
 
   /**
-   * Assemble a WYSIWYG editor.
+   * return a WYSIWYG editor if enabled in admin; otherwise return a textarea.
+   *
    * Renders at the spot it is called from unless $return is set
    * in which case it will be returned as a string.
    *
    * @param string $name
-   * @param integer $width
+   * @param integer $width - can be whole integer for px or include % symbol for % of parent width
    * @param integer $height
    * @param string $text
    * @param string $tbar - toolbar
@@ -276,23 +277,15 @@ class FaqForm {
    * @return string A html WYSIWYG editor ready to use
    */
   function editor_field($name, $width, $height, $text, $tbar = '', $return = false, $theme = '', $lang_code = OSF_LANG_CODE, $lang_direction = OSF_LANG_DIRECTION) {
+
   	if($tbar=='Client'){
   		$config['toolbar'] = array(
-  				array( 'Source','-','Maximize','-','Cut','Copy','Paste','PasteText','PasteFromWord','-','RemoveFormat','SpecialChar','-','Find','Replace','-','Undo','Redo','-','About' ),
+  				array( 'Source','-','Maximize','-','Cut','Copy','Paste','PasteText','PasteFromWord','-','RemoveFormat','SpecialChar','-','Find','Replace','-','Undo','Redo' ),
   				array( 'Bold','Italic','Underline','Strike','-','Subscript','Superscript','-','Link','Unlink','Anchor','-','BulletedList','NumberedList','-','Indent','Outdent','-','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock','-','HorizontalRule' ),
   		);
   	}
+
   	// theme can be changed from settings admin page
-//   	switch($theme){
-//   		case 'Kama':
-//   			$config['skin'] = 'kama';
-//   			break;
-//   		case 'Default':
-//   		case 'Moono':
-//   		default:
-//   			$config['skin'] = 'moono';
-//   			break;
-//   	}
   	$config['skin'] = ( is_dir( OSF_DOC_ROOT . DIR_FS_WEB_ROOT . 'faq/ckeditor/' . FAQ_CK_VERSION . '/skins/' . $theme) ? $theme : 'moono');
 
 
