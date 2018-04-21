@@ -303,16 +303,16 @@ if ($action == 'new_category' || $action == 'edit_category') {
 <table border="0" cellspacing="0" cellpadding="2" width="100%" class="list">
   <tr>
     <td valign="top"><?php echo OSF_QUESTION; ?></td>
-    <td><?php echo $faqForm->input_field('question', $fInfo->question, 'style="width:595px;"'); ?></td>
+    <td><?php echo $faqForm->input_field('question', $fInfo->question, 'style="width:97%;"'); ?></td>
   </tr>
   <tr>
     <td valign="top"><?php  echo OSF_FAQ_ANSWER; ?></td>
     <td>
 <?php
 	if(OSFDB_WYSIWYG_STAFF=='true' && is_dir(OSF_DOC_ROOT . DIR_FS_WEB_ROOT . 'faq/ckeditor/')){
-		$faqForm->editor_field('answer', '640', '300', (isset($fInfo->answer) ? $fInfo->answer : ''), '', false, OSFDB_WYS_STAFF_THEME);
+		$faqForm->editor_field('answer', '100%', '300', (isset($fInfo->answer) ? $fInfo->answer : ''), '', false, OSFDB_WYS_STAFF_THEME);
 	}else{
-		echo $faqForm->textarea_field('answer', 'soft', '70', '15', (isset($fInfo->answer) ? $fInfo->answer : ''), '', false);
+		echo $faqForm->textarea_field('answer', 'soft', '110', '15', (isset($fInfo->answer) ? $fInfo->answer : ''), '', false);
 	}
 ?>
     </td>
