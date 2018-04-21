@@ -161,7 +161,12 @@ if ($messageHandler->size() > 0) echo $messageHandler->output();
 
 		      switch($fsInfo->field_type){
 		        case 'textarea':
-		          $valueEditor = $faqForm->textarea_field('key_value', 'soft', 35, 10, $fsInfo->key_value);
+		        	if(OSFDB_WYSIWYG_STAFF=='true' && is_dir(OSF_DOC_ROOT . DIR_FS_WEB_ROOT . 'faq/ckeditor/')){
+		        		$valueEditor = $faqForm->editor_field('key_value', '100%', '200', (isset($fsInfo->key_value) ? $fsInfo->key_value : ''), 'Client', true, OSFDB_WYS_STAFF_THEME);
+		        	}else{
+		        		$valueEditor = $faqForm->textarea_field('key_value', 'soft', 35, 10, $fsInfo->key_value);
+		        	}
+
 		          break;
 
 		        case 'truefalse':
